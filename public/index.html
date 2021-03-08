@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mathquill.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="mathquill.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="mathquill.js"></script>
+    <script src="evaluatex.min.js"></script>
     <script>
-    var MQ = MathQuill.getInterface(2);
+      var MQ = MathQuill.getInterface(2);
     </script>
     <title>Document</title>
-</head>
-<body>
-    <h1>
-        Selamun Aleykum!
-    </h1>
+  </head>
+  <body>
+    <h1>Selamun Aleykum!</h1>
     <p>Type math here: <span id="math-field"></span></p>
     <p>LaTeX of what you typed: <span id="latex"></span></p>
+    <p>Answer calculated by evaluatex: <span id="ans"></span></p>
+    <script type="text/javascript">
+      var mathFieldSpan = document.getElementById('math-field');
+      var latexSpan = document.getElementById('latex');
+      var ansSpan = document.getElementById('ans');
 
-    <script>
-    var mathFieldSpan = document.getElementById('math-field');
-    var latexSpan = document.getElementById('latex');
+      fn = evaluatex(latexSpan);
+      result = fn();
+      ansSpan = result;
 
-    var MQ = MathQuill.getInterface(2); // for backcompat
-    var mathField = MQ.MathField(mathFieldSpan, {
-    spaceBehavesLikeTab: true, // configurable
-    handlers: {
-        edit: function() { // useful event handlers
-        latexSpan.textContent = mathField.latex(); // simple API
-        }
-    }
-    });
+      var MQ = MathQuill.getInterface(2); // for backcompat
+      var mathField = MQ.MathField(mathFieldSpan, {
+        spaceBehavesLikeTab: true, // configurable
+        handlers: {
+          edit: function () {
+            // useful event handlers
+            latexSpan.textContent = mathField.latex(); // simple API
+          },
+        },
+      });
     </script>
-    
-</body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+  </body>
+  <script src="request.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </html>

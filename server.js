@@ -1,40 +1,22 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const multer = require("multer");
-const Tesseract = require("tesseract.js");
-const path = require("path");
+const path = require('path');
+const RouteConf = require('./src/config/RouteConf');
 
-const storage = multer.diskStorage({
-  destination: (req, res, callback) => {
-    callback(null, "./uploads");
-  },
-  filename: (req, res, callback) => {
-    callback(null, res.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-
-app.post("/upload", upload.single("image"), (req, res) => {
-  console.log(req.file);
-
-  try {
-    Tesseract.recognize(`uploads/${req.file.filename}`, "eng", {
-      logger: (m) => console.log(m),
-    }).then(({ data: { text } }) => {
-      return res.json({
-        message: text,
-      });
-    });
-  } catch (err) {
-    console.error(err);
-  }
-});
-
+// Deploying back-end
 const port = 5000 || process.env.PORT;
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-app.use(express.static(path.join(__dirname, "public")));
+// Setting all routes
+RouteConf(express, app);
+
+// Serving front-end (static files)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Handling undhandled promise errors
+process.on('unhandledRejection', (err) => {
+  console.log(`Unhandled Error: ${err}`);
+  process.exit(1);
+});
