@@ -2,3 +2,4 @@ node_modules
 build
 uploads
 mathquill
+.env

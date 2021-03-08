@@ -24,8 +24,7 @@
       var ansSpan = document.getElementById('ans');
 
       fn = evaluatex(latexSpan);
-      result = fn();
-      ansSpan = result;
+      ansSpan.textContent = fn();
 
       var MQ = MathQuill.getInterface(2); // for backcompat
       var mathField = MQ.MathField(mathFieldSpan, {

@@ -3,6 +3,9 @@ const app = express();
 const path = require('path');
 const RouteConf = require('./src/config/RouteConf');
 
+// Environment variables
+require('dotenv').config();
+
 // Deploying back-end
 const port = 5000 || process.env.PORT;
 app.listen(port, () => {
