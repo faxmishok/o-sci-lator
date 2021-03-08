@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const multer = require("multer");
 const Tesseract = require("tesseract.js");
+const path = require("path");
 
 const storage = multer.diskStorage({
   destination: (req, res, callback) => {
@@ -35,3 +36,5 @@ const port = 5000 || process.env.PORT;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+app.use(express.static(path.join(__dirname, "public")));
