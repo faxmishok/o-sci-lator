@@ -1,6 +1,5 @@
 const path = require('path');
 const multer = require('multer');
-const { PATH } = require('../constants/paths');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.uploadImageHandler = (imgPath, size = 1024 * 1024 * 10) => {
@@ -9,7 +8,7 @@ exports.uploadImageHandler = (imgPath, size = 1024 * 1024 * 10) => {
       callback(null, imgPath);
     },
     filename: (req, file, callback) => {
-      callback(null, file.originalname);
+      callback(null, Date.now().toString() + path.extname(file.originalname));
     },
   });
 
