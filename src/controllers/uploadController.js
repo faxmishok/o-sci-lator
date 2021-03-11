@@ -58,17 +58,18 @@ exports.uploadMathPixAPI = asyncHandler(async (req, res, next) => {
 
   http
     .request(options, (httpres) => {
-      let data = [];
+      let data = '';
       httpres.on('data', (d) => {
-        data.push(d.toString());
+        data += d;
       });
       httpres.on('end', () => {
-        // return res.status(200).json({
-        //   jsonData,
-        // });
-        console.log(JSON.stringify(data));
+        return res.status(200).json(parseJSON(data));
       });
     })
     .on('error', console.error)
     .end(body);
 });
+
+function parseJSON(data) {
+  return JSON.parse(data);
+}
