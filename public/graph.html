@@ -4,14 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Graph Calculator</title>
     <script src="https://www.desmos.com/api/v1.5/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/self.css">
+    <style>
+        body {
+            background-color: #0d0f33;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <div id="calculator" style="width: 1000px; height: 600px;"></div>
 
+
+    <div class="outer">
+        <div class="container">
+            <div id="header">
+                GRAPH CALCULATOR
+            </div>
+            <div id="calculator"></div>
+        </div>
     </div>
+
     <script>
         var elt = document.getElementById('calculator');
         var calculator = Desmos.GraphingCalculator(elt);

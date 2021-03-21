@@ -1,14 +1,63 @@
 #file-upload {
-  
   height: 30%;
-  background-color: brown;
+  background-color: #58478c;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+/**********************************/
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
 }
 
+.file-upload label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  /* background: linear-gradient(326deg, #5f0a87, #a4508b); */
+  background-color: #6247aa;
+  background-image: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+.file-name {
+  position: absolute;
+  bottom: -35px;
+  left: 10px;
+  font-size: 0.85rem;
+  color: rgb(255, 255, 255);
+}
+
+input:hover + label,
+input:focus + label {
+  transform: scale(1.02);
+}
+
+/* Adding an outline to the label on focus */
+/* input:focus + label {
+  outline: 1px solid #000;
+  outline: -webkit-focus-ring-color auto 2px;
+} */
+
+/*********************************************/
 .image-preview {
   width: 300px;
   min-height: 100px;
-  border: 2px solid #dddddd;
+  /* border: 1px solid #dddddd; */
   margin-top: 15px;
+  margin-bottom: 15px;
 
   display: flex;
   align-items: center;
@@ -22,17 +71,39 @@
   width: 100%;
 }
 
-.custom-file-upload {
-  border: 1px solid #ccc;
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-}
-input[type="file"] {
+/***** SUBMIT BTN ****/
+#upload-btn {
   display: none;
 }
+/***** SUBMIT BTN ****/
 
-input[type="submit"] {
-  background-color: blue;
+/*
+
+GRAPH STYLE **************
+
+*/
+
+.outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+#calculator {
+  width: 1000px;
+  height: 600px;
+}
+
+#header {
+  font-size: 50px;
+  margin: 10px;
+  text-align: center;
+  font-family: 'Fredoka One', cursive;
   color: white;
 }

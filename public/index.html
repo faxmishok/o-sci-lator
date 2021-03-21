@@ -66,7 +66,7 @@
 			<header class="wrapper clearfix">
 				<h1 class="title">
 					<img id="header-logo" src="ocr-logo.svg" />
-					<span class="title-bold">OCR powered Scientific Calculator</span>
+					<span class="title-bold">Scientific Calculator</span><sup title="Optical Character Recognition">OCR</sup>
 				</h1>
 			</header>
 		</div>
@@ -83,18 +83,24 @@
 						<div id="answer"><span id="result-field"></span></div>
 						<div id="editor"><span id="expr-field"></span></div>
 
-
-						<div id="answer"><span id="result-field"></span></div>
-						<div id="editor"><span id="expr-field"></span></div>
-
-						<div id="file-upload">
-
-							<label class="custom-file-upload">
-								<input type="file" id="imageFile" name="image" />
-								Custom Upload
+						<div id="file-upload" class="file-upload">
+							
+							<input type="file" id="imageFile" class="file" name="image">
+							<label for="imageFile">
+								Select Image
+								<p class="file-name"></p>
 							</label>
-							<input type="submit" onclick="uploadImage()">
-
+							<script>
+								const file = document.querySelector('#imageFile');
+								file.addEventListener('change', (e) => {
+								const [file] = e.target.files;
+								const { name: fileName, size } = file;
+								const fileSize = (size / 1000).toFixed(2);
+								const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+								document.querySelector('.file-name').textContent = fileNameAndSize;
+								});
+							</script>
+			
 							<div class="image-preview" id="imagePreview">
 								<img src="" alt="Image Preview" class="image-preview__image">
 								<span class="image-preview__default-text">Image Preview</span>
@@ -126,30 +132,37 @@
 									});
 								</script>
 							</div>
-						</div>
-						<script>
-							function uploadImage() {
-								var blobFile = $('#imageFile')[0].files[0];
-								var formData = new FormData();
-								formData.append("image", blobFile);
 
-								$.ajax({
-									url: "/upload/mathpix",
-									type: "POST",
-									data: formData,
-									processData: false,
-									contentType: false,
-									success: function (response) {
-										// document.getElementsByClassName("mq-root-block")[0].innerHTML = response.data[1].value;
-										// console.log('bura girir');
-										window.location = `/?expr=${response.data[1].value}`
-									},
-									error: function (jqXHR, textStatus, errorMessage) {
-										console.log(errorMessage); // Optional
-									}
-								});
-							}
-						</script>
+							<input type="submit" id="upload-btn" onclick="uploadImage()">
+							<label for="upload-btn">
+								Upload
+								<p class="file-name"></p>
+							</label>
+
+							<script>
+								function uploadImage() {
+									var blobFile = $('#imageFile')[0].files[0];
+									var formData = new FormData();
+									formData.append("image", blobFile);
+	
+									$.ajax({
+										url: "/upload/mathpix",
+										type: "POST",
+										data: formData,
+										processData: false,
+										contentType: false,
+										success: function (response) {
+											// document.getElementsByClassName("mq-root-block")[0].innerHTML = response.data[1].value;
+											// console.log('bura girir');
+											window.location = `/?expr=${response.data[1].value}`
+										},
+										error: function (jqXHR, textStatus, errorMessage) {
+											console.log(errorMessage); // Optional
+										}
+									});
+								}
+							</script>
+						</div>
 
 
 						<div id="keypad">
@@ -179,10 +192,10 @@
 								<div class="key" latex-to-write="\sqrt{}" shift="-1"
 									title="Square root (= typing sqrt in the textbox)"><span>&#8730;x</span></div>
 
-								<div class="key ctrl-key" latex-to-write='Ka\left("\right)' shift="-1"
-									title="Get the Ka of an acid"><span>K<sub>a</sub></span></div>
-								<div class="key ctrl-key" latex-to-write='soluble\left("\right)' shift="-1"
-									title="Find if a binary salt is soluble (> 0.1 M)">solu</div>
+								<!-- <div class="key ctrl-key" latex-to-write='Ka\left("\right)' shift="-1"
+									title="Get the Ka of an acid"><span>K<sub>a</sub></span></div> -->
+								<!-- <div class="key ctrl-key" latex-to-write='soluble\left("\right)' shift="-1"
+									title="Find if a binary salt is soluble (> 0.1 M)">solu</div> -->
 
 								<div class="key" latex-to-write="," title="Comma">,</div>
 								<div class="key num-key" latex-to-write="true">T</div>
@@ -224,10 +237,10 @@
 									title="Nth root (= typing nthroot in the textbox)"><span><sup>n</sup>&#8730;x</span>
 								</div>
 
-								<div class="key ctrl-key" latex-to-write='Kb\left("\right)' shift="-1"
-									title="Get the Kb of a base"><span>K<sub>b</sub></span></div>
-								<div class="key ctrl-key" latex-to-write='charge\left("\right)' shift="-1"
-									title="Find the common charge values of an ion (elemental or polyatomic)">chrg</div>
+								<!-- <div class="key ctrl-key" latex-to-write='Kb\left("\right)' shift="-1"
+									title="Get the Kb of a base"><span>K<sub>b</sub></span></div> -->
+								<!-- <div class="key ctrl-key" latex-to-write='charge\left("\right)' shift="-1"
+									title="Find the common charge values of an ion (elemental or polyatomic)">chrg</div> -->
 
 								<div class="key" latex-to-write="mod" title="Modulo operator">mod</div>
 								<div class="key num-key" latex-to-write="false">F</div>
@@ -263,11 +276,11 @@
 								<div class="key num-key" id="periodic-btn" title="Open the periodic table of elements">
 									&#9883;</div>
 
-								<div class="key ctrl-key" latex-to-write='Ksp\left("\right)' shift="-1"
-									title="Get the Ksp of a salt"><span>K<sub>sp</sub></span></div>
-								<div class="key ctrl-key" latex-to-write='balance\left("\right)' shift="-1"
+								<!-- <div class="key ctrl-key" latex-to-write='Ksp\left("\right)' shift="-1"
+									title="Get the Ksp of a salt"><span>K<sub>sp</sub></span></div> -->
+								<!-- <div class="key ctrl-key" latex-to-write='balance\left("\right)' shift="-1"
 									title="Balance a chemical equation of the form A ... B = C ... D (= may be replaced with >, ->, or <->)">
-									&#9878;</div>
+									&#9878;</div> -->
 
 								<div class="key" latex-to-write="random\left(\right)" shift="-1"
 									title="Generate random rumber: random() OR random(high) OR random(low, high)">rand
@@ -309,18 +322,18 @@
 									title="Get or set (by using a second parameter) the number of significant figures in a number">
 									sf</div>
 
-								<!--<div class="key ctrl-key" id="batch-btn" title="(Coming Soon) Open the batch lookup window to balance multiple equations or look up multiple Ka's, Kb's, etc. at once">&#x2261;</div>-->
+								<!-- <div class="key ctrl-key" id="batch-btn" title="(Coming Soon) Open the batch lookup window to balance multiple equations or look up multiple Ka's, Kb's, etc. at once">&#x2261;</div> -->
 
 								<div class="key ctrl-key" latex-to-write='molmass\left("\right)' shift="-1"
 									title="Get the molar mass of an element or compound">mass</div>
 
-								<div class="key ctrl-key" latex-to-write="qdtcp\left(\right)" shift="-1"
+								<!-- <div class="key ctrl-key" latex-to-write="qdtcp\left(\right)" shift="-1"
 									title="Quadratic solver (only returns the larger value; useful for acid/base calculations): qdtcp(a,b,c)">
 									<span>qdtc<sup>+</sup></span>
-								</div>
+								</div> -->
 
-								<div class="key" latex-to-write="qdtc\left(\right)" shift="-1"
-									title="Quadratic solver: qdtc(a,b,c)">qdtc</div>
+								<!-- <div class="key" latex-to-write="qdtc\left(\right)" shift="-1"
+									title="Quadratic solver: qdtc(a,b,c)">qdtc</div> -->
 
 								<div class="key" latex-to-write='round\left(\right)' shift="-1"
 									title="Round (round to closest integer, 5 = up)">round</div>
@@ -785,14 +798,14 @@
 											class="elem-name">Lr</span></td>
 
 									<td colspan="1" class="table-spacer"></td>
-									<td class="ptable-key" latex-to-write='soluble\left("\right)' shift="-1"
-										title="Find if a binary salt is soluble (> 0.1 M)">solu</td>
-									<td class="ptable-key" latex-to-write='charge\left("\right)' shift="-1"
+									<!-- <td class="ptable-key" latex-to-write='soluble\left("\right)' shift="-1"
+										title="Find if a binary salt is soluble (> 0.1 M)">solu</td> -->
+									<!-- <td class="ptable-key" latex-to-write='charge\left("\right)' shift="-1"
 										title="Find the common charge values of an ion (elemental or polyatomic)">chrg
-									</td>
-									<td class="ptable-key" latex-to-write='balance\left("\right)' shift="-1"
+									</td> -->
+									<!-- <td class="ptable-key" latex-to-write='balance\left("\right)' shift="-1"
 										title="Balance a chemical equation of the form A ... B = C ... D (= may be replaced with >, ->, or <->)">
-										&#9878;</td>
+										&#9878;</td> -->
 								</tr>
 							</table>
 							<div id="periodic-table-close">&times;</div>
