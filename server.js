@@ -12,6 +12,9 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+// Parse JSON in request body
+app.use(express.json());
+
 // Setting all routes
 RouteConf(express, app);
 

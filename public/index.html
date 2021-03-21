@@ -18,13 +18,13 @@
     <p>Type math here: <span id="math-field"></span></p>
     <p>LaTeX of what you typed: <span id="latex"></span></p>
     <p>Answer calculated by evaluatex: <span id="ans"></span></p>
+    <form action="" method="POST">
+      <input id="math-field" type="text">
+    </form>
     <script type="text/javascript">
       var mathFieldSpan = document.getElementById('math-field');
       var latexSpan = document.getElementById('latex');
-      var ansSpan = document.getElementById('ans');
 
-      fn = evaluatex(latexSpan);
-      ansSpan.textContent = fn();
 
       var MQ = MathQuill.getInterface(2); // for backcompat
       var mathField = MQ.MathField(mathFieldSpan, {

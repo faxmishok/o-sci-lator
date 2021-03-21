@@ -2,7 +2,6 @@ const asyncHandler = require('../middleware/asyncHandler');
 const Tesseract = require('tesseract.js');
 const { PATH } = require('../constants/paths');
 const path = require('path');
-const fs = require('fs');
 const http = require('http');
 const imageToURI = require('image-to-uri');
 
