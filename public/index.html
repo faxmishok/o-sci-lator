@@ -88,9 +88,13 @@
 						<div id="editor"><span id="expr-field"></span></div>
 
 						<div id="file-upload">
-							<input type="file" id="imageFile" name="image">
+
+							<label class="custom-file-upload">
+								<input type="file" id="imageFile" name="image" />
+								Custom Upload
+							</label>
 							<input type="submit" onclick="uploadImage()">
-						
+
 							<div class="image-preview" id="imagePreview">
 								<img src="" alt="Image Preview" class="image-preview__image">
 								<span class="image-preview__default-text">Image Preview</span>
@@ -99,8 +103,8 @@
 									const previewContainer = document.getElementById("imagePreview");
 									const previewImage = previewContainer.querySelector(".image-preview__image");
 									const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-									
-									imageFile.addEventListener("change", function() {
+
+									imageFile.addEventListener("change", function () {
 										const file = this.files[0];
 
 										if (file) {
@@ -109,7 +113,7 @@
 											previewDefaultText.style.display = "none";
 											previewImage.style.display = "block";
 
-											reader.addEventListener("load", function() {
+											reader.addEventListener("load", function () {
 												previewImage.setAttribute("src", this.result);
 											});
 
