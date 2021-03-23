@@ -3,6 +3,7 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
+  background: #04021f;
 }
 
 .navlist {
@@ -22,7 +23,7 @@ body {
   text-align: center;
   padding: 27px 71px;
   text-decoration: none;
-  font-size: 22px;
+  font-size: 17px;
 
   text-transform: uppercase;
   font-family: 'Fredoka One', cursive;
@@ -44,8 +45,7 @@ a.navlinks:hover {
   color: white;
 }
 
-a:hover #ocr {
-}
+
 
 .div1 {
   background-color: #0d0f33;
@@ -91,23 +91,24 @@ a:hover #ocr {
   position: absolute;
   top: 45%;
   left: 50%;
-  margin-right: -50%;
+  
   transform: translate(-50%, -50%);
+  font-family: 'Fredoka One', cursive;
 }
 
 .div2 strong {
   float: right;
-  font-size: 12px;
+  font-size: 10px;
   text-transform: uppercase;
   color: #a9acef;
+  font-family: 'Fredoka One', cursive;
 }
 
 .mainContainer {
   padding: 0;
   margin: 0;
   height: 460px;
-  width: 100%;
-
+  display: flex;
   background-color: #f24648;
 }
 
@@ -116,34 +117,37 @@ a:hover #ocr {
   width: 50%;
   height: 460px;
   margin: 0px;
-  padding: 0em;
-  display: inline-table;
+  padding: 0px;
+  text-align: center;
   background-color: #04021f;
 }
 
 #conleft {
-  float: left;
+  /* float: left; */
+  /* text-align: center; */
 }
 #conright {
-  float: right;
+  /* float: right; */
 }
 
 #conleft img {
   width: 317px;
   height: 200px;
-  padding-left: 134px;
+  
 }
 #conleft i {
   color: lightseagreen;
   font-size: 15px;
+  font-family:  'Fredoka One', cursive; 
 }
 
 #conright img {
   width: 300px;
   height: 200px;
-  padding-left: 84px;
+ 
 }
 #conright em {
   color: orange;
   font-size: 15px;
+  font-family:  'Fredoka One', cursive;
 }
