@@ -707,6 +707,8 @@ sup {
 .header-container {
   position: relative;
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
   background: #eee;
   -moz-user-select: none;
   -khtml-user-select: none;

@@ -50,6 +50,8 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- AXIOS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+	<script src="https://use.fontawesome.com/16e233c995.js"></script>
+
 </head>
 
 <body>
@@ -66,9 +68,14 @@
 			<header class="wrapper clearfix">
 				<h1 class="title">
 					<img id="header-logo" src="ocr-logo.svg" />
-					<span class="title-bold">Scientific Calculator</span><sup title="Optical Character Recognition">OCR</sup>
+					<span class="title-bold">Scientific Calculator</span><sup
+						title="Optical Character Recognition">OCR</sup>
 				</h1>
+
 			</header>
+			<div class="home-btn">
+				<a href="home.html"><i id="fa-home" class="fa fa-home" aria-hidden="true"></i></a>
+			</div>
 		</div>
 
 		<div class="main-container">
@@ -84,7 +91,7 @@
 						<div id="editor"><span id="expr-field"></span></div>
 
 						<div id="file-upload" class="file-upload">
-							
+
 							<input type="file" id="imageFile" class="file" name="image">
 							<label for="imageFile">
 								Select Image
@@ -93,14 +100,14 @@
 							<script>
 								const file = document.querySelector('#imageFile');
 								file.addEventListener('change', (e) => {
-								const [file] = e.target.files;
-								const { name: fileName, size } = file;
-								const fileSize = (size / 1000).toFixed(2);
-								const fileNameAndSize = `${fileName} - ${fileSize}KB`;
-								document.querySelector('.file-name').textContent = fileNameAndSize;
+									const [file] = e.target.files;
+									const { name: fileName, size } = file;
+									const fileSize = (size / 1000).toFixed(2);
+									const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+									document.querySelector('.file-name').textContent = fileNameAndSize;
 								});
 							</script>
-			
+
 							<div class="image-preview" id="imagePreview">
 								<img src="" alt="Image Preview" class="image-preview__image">
 								<span class="image-preview__default-text">Image Preview</span>
@@ -144,7 +151,7 @@
 									var blobFile = $('#imageFile')[0].files[0];
 									var formData = new FormData();
 									formData.append("image", blobFile);
-	
+
 									$.ajax({
 										url: "/upload/mathpix",
 										type: "POST",
