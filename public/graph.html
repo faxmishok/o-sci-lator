@@ -7,7 +7,8 @@
     <title>Graph Calculator</title>
     <script src="https://www.desmos.com/api/v1.5/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/self.css">
+    <link rel="stylesheet" type="text/css" href="graph.css">
+    <script src="https://use.fontawesome.com/16e233c995.js"></script>
     <style>
         body {
             background-color: #0d0f33;
@@ -19,8 +20,13 @@
 
     <div class="outer">
         <div class="container">
-            <div id="header">
-                GRAPH CALCULATOR
+            <div class="btn-header">
+                <!-- <div> -->
+                    <a href="/home.html"><i id="fa-home" class="fa fa-home" aria-hidden="true"></i></a>
+                <!-- </div> -->
+                <div id="header">
+                    GRAPH CALCULATOR
+                </div>
             </div>
             <div id="calculator"></div>
         </div>
@@ -29,7 +35,7 @@
     <script>
         var elt = document.getElementById('calculator');
         var calculator = Desmos.GraphingCalculator(elt);
-        calculator.setExpression({ id: 'graph1', latex: 'y=x^2' });
+        calculator.setExpression({ id: 'graph1', latex: 'y=x^3'});
       </script>
 </body>
 </html>

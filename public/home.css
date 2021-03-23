@@ -4,6 +4,7 @@ body {
   width: 100%;
   height: 100%;
   background: #04021f;
+  -webkit-user-select: none;
 }
 
 .navlist {
@@ -23,7 +24,7 @@ body {
   text-align: center;
   padding: 27px 71px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
 
   text-transform: uppercase;
   font-family: 'Fredoka One', cursive;
@@ -44,8 +45,6 @@ body {
 a.navlinks:hover {
   color: white;
 }
-
-
 
 .div1 {
   background-color: #0d0f33;
@@ -82,8 +81,9 @@ a.navlinks:hover {
 }
 
 .div2 p {
+  letter-spacing: 1px;
   text-transform: uppercase;
-
+  font-size: 20px;
   font-weight: bold;
   color: #f24648;
 
@@ -91,12 +91,13 @@ a.navlinks:hover {
   position: absolute;
   top: 45%;
   left: 50%;
-  
+
   transform: translate(-50%, -50%);
   font-family: 'Fredoka One', cursive;
 }
 
 .div2 strong {
+  padding-right: 4px;
   float: right;
   font-size: 10px;
   text-transform: uppercase;
@@ -123,31 +124,32 @@ a.navlinks:hover {
 }
 
 #conleft {
+  padding: 0px 50px 0px 50px;
   /* float: left; */
   /* text-align: center; */
 }
 #conright {
   /* float: right; */
+  padding: 0px 50px 0px 50px;
 }
 
 #conleft img {
   width: 317px;
   height: 200px;
-  
 }
+
 #conleft i {
   color: lightseagreen;
   font-size: 15px;
-  font-family:  'Fredoka One', cursive; 
+  font-family: 'Fredoka One', cursive;
 }
 
 #conright img {
   width: 300px;
   height: 200px;
- 
 }
 #conright em {
   color: orange;
   font-size: 15px;
-  font-family:  'Fredoka One', cursive;
+  font-family: 'Fredoka One', cursive;
 }
