@@ -1042,7 +1042,7 @@ nav a {
 #history .history-delete::before {
   content: '✕';
   font-weight: 300;
-  color: #e9a453;
+  color: #ef98ff;
   font-size: 13px;
   padding: 4px 6px;
   text-align: center;
@@ -1054,7 +1054,7 @@ nav a {
   transition: background 0.5s ease;
 }
 #history .history-delete:hover::before {
-  background-color: #bc6513;
+  background-color: #7e13bc;
 }
 #history .history-delete {
   float: right;
