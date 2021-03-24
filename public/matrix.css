@@ -20,3 +20,27 @@ input::-webkit-inner-spin-button {
 .parent-container {
   width: 30%;
 }
+#inputField:last-child .mainClick{
+  display: none !important;
+
+}
+.customFirstSelect{
+  width: 40%;
+  margin-bottom: 20px;
+}
+.mainClick{
+  margin-top: 30px;
+}
+.parent-container:first-child{
+  /* display: flex;
+  justify-content: center;
+  */
+}
+.parent-container:last-child{
+
+ 
+}
+.customOperation {
+  width: 20%;
+  font-size: 25px;
+}

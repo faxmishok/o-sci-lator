@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="matrix.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
@@ -13,23 +16,29 @@
 </head>
 
 <body>
-    <div class="dropdown">
-        <select name="matrixValue" id="matrixValue">
-            <option selected="selected" value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+    <div class="container">
+        <div class="dropdown">
+            <select name="matrixValue" class="form-control customFirstSelect" id="matrixValue">
+                <option value="2">2</option>
+                <option selected="selected" value="3">3</option>
+                <option value="4">4</option>
 
 
 
-        </select>
+            </select>
+        </div>
+
+
     </div>
+    <div class="container">
 
-    <div class="flex-container">
 
-        <div class="parent-container">
-            <div class="container">
+        <div class="flex-container">
+
+            <div class="parent-container">
+
                 <div class="well well-lg">
-                    <h1 class="text-center">Jacobian Method</h1>
+
                     <form id="inputField" role="form">
                         <div class="input-group">
                             <input type="number" class="firstInput" name="field00" size="3">
@@ -57,12 +66,12 @@
                     </div>
 
                 </div>
+
             </div>
-        </div>
-        <div class="parent-container">
-            <div class="container">
-                <select class="customOperation">
-                    <option value="aaa">+</option>
+            <div class="parent-container">
+
+                <select class="customOperation form-control">
+                    <option value="+">+</option>
                     <option value="-">-</option>
                     <option value="*">×</option>
                     <option value="/">/</option>
@@ -71,13 +80,13 @@
                     <option value="det">Determinant</option>
                     <option value="det">Determinant</option> -->
                 </select>
-            </div>
-        </div>
 
-        <div class="parent-container">
-            <div class="container">
+            </div>
+
+            <div class="parent-container">
+
                 <div class="well well-lg">
-                    <form id="inputField" role="form">
+                    <form id="inputField" class="lastAttr" role="form">
                         <div class="input-group">
                             <input type="number" class="secondInput" name="field00" size="3">
                             <input type="number" class="secondInput" name="field01" size="3">
@@ -100,37 +109,14 @@
                     </form>
 
                 </div>
-            </div>
-        </div>
 
+            </div>
+
+        </div>
+        <div class="customResult"></div>
     </div>
 
-    <div id="resultField">
-        <div class="parent-container">
-            <div class="container">
-                <div class="well well-lg">
-                    <div class="input-group">
-                        <input type="number" class="firstInput" name="field00" size="3">
-                        <input type="number" class="firstInput" name="field01" size="3">
-                        <input type="number" class="firstInput" name="field02" size="3">
-                    </div>
 
-                    <div class="input-group">
-                        <input type="number " class="firstInput" name="field10" size="3">
-                        <input type="number " class="firstInput" name="field11" size="3">
-                        <input type="number " class="firstInput" name="field12" size="3">
-                    </div>
-
-                    <div class="input-group">
-                        <input type="number " class="firstInput" name="field20" size="3">
-                        <input type="number " class="firstInput" name="field21" size="3">
-                        <input type="number" class="firstInput" name="field22" size="3">
-                    </div>
-                    <br>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <script src="matrix.js"></script>
