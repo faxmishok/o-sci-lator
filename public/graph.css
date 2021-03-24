@@ -1,3 +1,12 @@
+html {
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  background-color: #0d0f33;
+}
+
 .outer {
   display: flex;
   justify-content: space-around;
@@ -12,8 +21,8 @@
 }
 
 #calculator {
-  width: 1000px;
-  height: 600px;
+  width: 800px;
+  height: 480px;
   padding-top: 40px;
 }
 
@@ -79,7 +88,6 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  -webkit-user-select: none;
 }
 
 i {
@@ -93,3 +101,13 @@ i {
 }
 
 /*****************************/
+
+.resizable {
+  overflow: hidden;
+  resize: both;
+  max-width: 1500px;
+  max-height: 900px;
+  min-width: 50px;
+  min-height: 50px;
+  background-color: none;
+}

@@ -1,0 +1,841 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Scientific Calculator - OCR</title>
+	<meta name="description" content="O-Sci-Lator - OCR powered Scientific Calculator" />
+	<meta name="author" content="Alex Yu" />
+	<meta name="copyright" content="All content copyright 2021 O-Sci-Lator" />
+	<meta name="keywords"
+	content="mathematics,calculator,evaluator,evaluatex,latex,o-sci-lator,oscillator,MathQuill,mathpix,students,university,necessary" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui" />
+	<meta name="robots" content="index,follow">
+
+	<link rel="stylesheet" type="text/css" href="css/production.css" />
+	<link rel="stylesheet" type="text/css" href="css/self.css">
+	<!-- <noscript> -->
+	<!-- <style type="text/css"> -->
+	<!-- body{ -->
+	<!-- opacity:1; -->
+	<!-- } -->
+	<!-- </style> -->
+	<!-- </noscript> -->
+
+	<link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="60x60" href="apple-touch-icon-60x60.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-76x76.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png" />
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png" />
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192" />
+	<link rel="icon" type="image.png" href="android-chrome-512x512.png" sizes="512x512" />
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+	<link rel="manifest" href="site.webmanifest" />
+	<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5933a7" />
+	<meta name="apple-mobile-web-app-title" content="O-Sci-Lator" />
+	<meta name="application-name" content="O-Sci-Lator" />
+	<meta name="msapplication-TileColor" content="#da532c" />
+	<meta name="msapplication-TileImage" content="mstile-144x144.png" />
+	<meta name="theme-color" content="#ffffff" />
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- AXIOS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://use.fontawesome.com/16e233c995.js"></script>
+
+</head>
+
+<body>
+	<div id="loading-spinner"></div>
+	<noscript>Sorry, but O-Sci-Lator requires javascript to work properly. Please enable JavaScript in your browser or
+		upgrade to a browser that supports JavaScript.</noscript>
+
+	<div class="site-container">
+		<!--[if lt IE 8]>
+			<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+
+		<div class="header-container">
+			<header class="wrapper clearfix">
+				<h1 class="title">
+					<img draggable="false" id="header-logo" src="ocr-logo.svg" />
+					<span class="title-bold">Scientific Calculator</span><sup
+						title="Optical Character Recognition">OCR</sup>
+				</h1>
+
+			</header>
+			<div class="home-btn">
+				<a id="home-btn" href="/"><i id="fa-home" class="fa fa-home" aria-hidden="true"></i></a>
+			</div>
+		</div>
+
+		<div class="main-container">
+			<div class="main wrapper clearfix">
+
+				<article>
+					<section>
+						<!-- <a href="https://github.com/sxyu/Hexane" id="github-fork" title="Open Hexane's GitHub repository in a new tab" class="mobile-hide" target="_blank">
+							<img style="position: absolute; top: 0; right: 0; border: 0;" src="img/github-fork.png" alt="Fork me on GitHub"/>
+						</a> -->
+
+						<div id="answer"><span id="result-field"></span></div>
+						<div id="editor"><span id="expr-field"></span></div>
+
+						<div id="file-upload" class="file-upload">
+
+							<input type="file" id="imageFile" class="file" name="image">
+							<label for="imageFile">
+								Select Image
+								<p class="file-name"></p>
+							</label>
+							<script>
+								const file = document.querySelector('#imageFile');
+								file.addEventListener('change', (e) => {
+									const [file] = e.target.files;
+									const { name: fileName, size } = file;
+									const fileSize = (size / 1000).toFixed(2);
+									const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+									document.querySelector('.file-name').textContent = fileNameAndSize;
+								});
+							</script>
+
+							<div class="image-preview" id="imagePreview">
+								<img src="" alt="Image Preview" class="image-preview__image">
+								<span class="image-preview__default-text">Image Preview</span>
+								<script>
+									const imageFile = document.getElementById("imageFile");
+									const previewContainer = document.getElementById("imagePreview");
+									const previewImage = previewContainer.querySelector(".image-preview__image");
+									const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+
+									imageFile.addEventListener("change", function () {
+										const file = this.files[0];
+
+										if (file) {
+											const reader = new FileReader();
+
+											previewDefaultText.style.display = "none";
+											previewImage.style.display = "block";
+
+											reader.addEventListener("load", function () {
+												previewImage.setAttribute("src", this.result);
+											});
+
+											reader.readAsDataURL(file);
+										} else {
+											previewDefaultText.style.display = null;
+											previewImage.style.display = null;
+											previewImage.setAttribute("src", "");
+										}
+									});
+								</script>
+							</div>
+
+							<input type="submit" id="upload-btn" onclick="uploadImage()">
+							<label for="upload-btn">
+								Upload
+								<p class="file-name"></p>
+							</label>
+
+							<script>
+								function uploadImage() {
+									var blobFile = $('#imageFile')[0].files[0];
+									var formData = new FormData();
+									formData.append("image", blobFile);
+
+									$.ajax({
+										url: "/upload/mathpix",
+										type: "POST",
+										data: formData,
+										processData: false,
+										contentType: false,
+										success: function (response) {
+											// document.getElementsByClassName("mq-root-block")[0].innerHTML = response.data[1].value;
+											// console.log('bura girir');
+											window.location = `/?expr=${response.data[1].value}`
+										},
+										error: function (jqXHR, textStatus, errorMessage) {
+											console.log(errorMessage); // Optional
+										}
+									});
+								}
+							</script>
+						</div>
+
+
+						<div id="keypad">
+							<div class="key-row">
+								<!-- text-to-add: add text to the MathQuill textbox; 
+									 keys-to-type: simulate key presses into the MathQuill textbox
+									 latex-to-write: add LaTeX markup -->
+								<div class="key num-key" latex-to-write="1">1</div>
+								<div class="key num-key" latex-to-write="2">2</div>
+								<div class="key num-key" latex-to-write="3">3</div>
+
+								<div class="key" latex-to-write="+">+</div>
+
+								<div class="key ctrl-key double-wid" keys-to-type="Backspace"
+									title="Delete previous item">&#9003;</div>
+								<div class="key ctrl-key" keys-to-type="Del" title="Delete next item">&#8998;</div>
+
+
+								<!-- Note: if both are specified, latex-to-write is evaluated before keys-to-type  -->
+								<div class="key" latex-to-write="#"
+									title="Mark number as infinitely precise (SigFigs = Infinity)">#</div>
+
+								<div class="key" latex-to-write="log_{10}" keys-to-type="Right"
+									title="Log Base 10 (= typing log_10 in the textbox)">log</div>
+								<div class="key" latex-to-write="log_{}" shift="-1"
+									title="Log base x (= typing log_ in the textbox)"><span>log<sub>x</sub></span></div>
+								<div class="key" latex-to-write="\sqrt{}" shift="-1"
+									title="Square root (= typing sqrt in the textbox)"><span>&#8730;x</span></div>
+
+								<!-- <div class="key ctrl-key" latex-to-write='Ka\left("\right)' shift="-1"
+									title="Get the Ka of an acid"><span>K<sub>a</sub></span></div> -->
+								<!-- <div class="key ctrl-key" latex-to-write='soluble\left("\right)' shift="-1"
+									title="Find if a binary salt is soluble (> 0.1 M)">solu</div> -->
+
+								<div class="key" latex-to-write="," title="Comma">,</div>
+								<div class="key num-key" latex-to-write="true">T</div>
+								<div class="key" latex-to-write="and" title="Logical and">and</div>
+
+								<div class="key" latex-to-write="sin\left(\right)" shift="-1">sin</div>
+								<div class="key" latex-to-write="asin\left(\right)" shift="-1">asin</div>
+
+								<div class="key num-key" latex-to-write="\pi" title="Pi (equivalent to typing pi)">&pi;
+								</div>
+								<div class="key num-key" latex-to-write="e" title="Euler's number">e</div>
+								<div class="key num-key" latex-to-write="A" title="Avogadro's number">A</div>
+							</div>
+
+							<div class="key-row">
+								<div class="key num-key" latex-to-write="4">4</div>
+								<div class="key num-key" latex-to-write="5">5</div>
+								<div class="key num-key" latex-to-write="6">6</div>
+
+								<div class="key" latex-to-write="\times" title="Multiplication (shortcut: *)">&times;
+								</div>
+
+								<div class="key ctrl-key" id="enter-btn"
+									title="Save the current result (see the 'saved results' block below)">Save</div>
+								<div class="key ctrl-key double-wid" id="allclear-btn" title="Clear textbox">Clear</div>
+
+								<div class="key" latex-to-write='"'
+									title='Mark the beginning & end of a chemical formula (example use: Ka("H2PO4"))'>"
+								</div>
+
+								<div class="key" latex-to-write="^2" title="Square (equivalent to typing ^2)">
+									<span>a<sup>2</sup></span>
+								</div>
+								<div class="key" latex-to-write="^{}" shift="-1" title="Exponent (shortcut: ^)">
+									<span>a<sup>x</sup></span>
+								</div>
+
+								<div class="key" latex-to-write="\sqrt[]{}" shift="-2"
+									title="Nth root (= typing nthroot in the textbox)"><span><sup>n</sup>&#8730;x</span>
+								</div>
+
+								<!-- <div class="key ctrl-key" latex-to-write='Kb\left("\right)' shift="-1"
+									title="Get the Kb of a base"><span>K<sub>b</sub></span></div> -->
+								<!-- <div class="key ctrl-key" latex-to-write='charge\left("\right)' shift="-1"
+									title="Find the common charge values of an ion (elemental or polyatomic)">chrg</div> -->
+
+								<div class="key" latex-to-write="mod" title="Modulo operator">mod</div>
+								<div class="key num-key" latex-to-write="false">F</div>
+
+								<div class="key" latex-to-write="or" title="Logical or">or</div>
+
+								<div class="key" latex-to-write="cos\left(\right)" shift="-1">cos</div>
+								<div class="key" latex-to-write="acos\left(\right)" shift="-1">acos</div>
+
+								<div class="key num-key" latex-to-write="x">x</div>
+								<div class="key num-key" latex-to-write="y">y</div>
+								<div class="key num-key" latex-to-write="z">z</div>
+							</div>
+
+							<div class="key-row">
+								<div class="key num-key" latex-to-write="7">7</div>
+								<div class="key num-key" latex-to-write="8">8</div>
+								<div class="key num-key" latex-to-write="9">9</div>
+
+								<div class="key" latex-to-write="-">-</div>
+
+								<div class="key ctrl-key" keys-to-type="Home" title="Go to the beginning of the line">
+									&#x27f8;</div>
+								<div class="key ctrl-key" keys-to-type="Up">&#9650;</div>
+								<div class="key ctrl-key" keys-to-type="End" title="Go to the end of the line">&#x27f9;
+								</div>
+
+								<div class="key" text-to-add="(">(</div>
+								<div class="key" text-to-add=")">)</div>
+
+								<div class="key" latex-to-write="%" title="Percent">%</div>
+
+								<div class="key num-key" id="periodic-btn" title="Open the periodic table of elements">
+									&#9883;</div>
+
+								<!-- <div class="key ctrl-key" latex-to-write='Ksp\left("\right)' shift="-1"
+									title="Get the Ksp of a salt"><span>K<sub>sp</sub></span></div> -->
+								<!-- <div class="key ctrl-key" latex-to-write='balance\left("\right)' shift="-1"
+									title="Balance a chemical equation of the form A ... B = C ... D (= may be replaced with >, ->, or <->)">
+									&#9878;</div> -->
+
+								<div class="key" latex-to-write="random\left(\right)" shift="-1"
+									title="Generate random rumber: random() OR random(high) OR random(low, high)">rand
+								</div>
+								<div class="key" latex-to-write="sign\left(\right)" shift="-1"
+									title="Sign function (1 if > 0, -1 if < 0, 0 if 0)">sign</div>
+
+								<div class="key" latex-to-write="xor" title="Logical xor">xor</div>
+
+								<div class="key" latex-to-write="tan\left(\right)" shift="-1">tan</div>
+								<div class="key" latex-to-write="atan\left(\right)" shift="-1">atan</div>
+
+								<div class="key num-key" latex-to-write="a">a</div>
+								<div class="key num-key" latex-to-write="b">b</div>
+								<div class="key num-key" latex-to-write="c">c</div>
+
+							</div>
+
+							<div class="key-row">
+								<div class="key" latex-to-write="E"
+									title="Multiply by 10 raised to the xth power (or use E)">
+									<span>&times;10<sup>x</sup></span>
+								</div>
+								<div class="key num-key" latex-to-write="0">0</div>
+								<div class="key" latex-to-write=".">.</div>
+
+								<div class="key" text-to-add="/" title="Create fraction (divide by; shortcut: /)">
+									&divide;</div>
+
+								<div class="key ctrl-key" keys-to-type="Left">&#9664;</div>
+								<div class="key ctrl-key" keys-to-type="Down">&#9660;</div>
+								<div class="key ctrl-key" keys-to-type="Right">&#9654;</div>
+								<div class="key" latex-to-write="{">{</div>
+								<div class="key" latex-to-write="{">}</div>
+
+								<div class="key" latex-to-write="|" title="Absolute value (shortcut: |)">|x|</div>
+
+								<div class="key ctrl-key" latex-to-write="sf\left(\right)" shift="-1"
+									title="Get or set (by using a second parameter) the number of significant figures in a number">
+									sf</div>
+
+								<!-- <div class="key ctrl-key" id="batch-btn" title="(Coming Soon) Open the batch lookup window to balance multiple equations or look up multiple Ka's, Kb's, etc. at once">&#x2261;</div> -->
+
+								<div class="key ctrl-key" latex-to-write='molmass\left("\right)' shift="-1"
+									title="Get the molar mass of an element or compound">mass</div>
+
+								<!-- <div class="key ctrl-key" latex-to-write="qdtcp\left(\right)" shift="-1"
+									title="Quadratic solver (only returns the larger value; useful for acid/base calculations): qdtcp(a,b,c)">
+									<span>qdtc<sup>+</sup></span>
+								</div> -->
+
+								<!-- <div class="key" latex-to-write="qdtc\left(\right)" shift="-1"
+									title="Quadratic solver: qdtc(a,b,c)">qdtc</div> -->
+
+								<div class="key" latex-to-write='round\left(\right)' shift="-1"
+									title="Round (round to closest integer, 5 = up)">round</div>
+
+								<div class="key" latex-to-write="not" title="Logical not">not</div>
+
+								<div class="key" latex-to-write='floor\left(\right)' shift="-1"
+									title="Floor (round down)">floor</div>
+								<div class="key" latex-to-write='ceil\left(\right)' shift="-1"
+									title="Ceiling (round up)">ceil</div>
+
+								<div class="key num-key" latex-to-write='\theta' title="Theta">&theta;</div>
+								<div class="key" latex-to-write=":="
+									title="Variable assignment operator := (ex. x := 2)">:=</div>
+								<div class="key" latex-to-write="_{}" shift="-1"
+									title="Variable subscript (shortcut: _)"><span>a<sub>x</sub></span></div>
+							</div>
+						</div>
+
+						<div id="history">
+							<p class="history-tip"><strong>Saved Results</strong><span class="mobile-hide">
+									&nbsp;|&nbsp; Press <kbd>ENTER</kbd> in the textbox to the save current
+									result</span> &nbsp;|
+								<a class="history-clear">Clear</a>
+							</p>
+						</div>
+
+						<div id="memory">
+							<div class="contiguous">
+								<div class="memory-tile" var="x">x</div>
+								<div class="memory-tile" var="y">y</div>
+								<div class="memory-tile" var="z">z</div>
+							</div>
+
+							<div class="contiguous">
+								<div class="memory-tile" var="a">a</div>
+								<div class="memory-tile" var="b">b</div>
+								<div class="memory-tile" var="c">c</div>
+							</div>
+
+							<div class="contiguous">
+								<div class="memory-tile" var="\theta" latex-to-write='\theta'>&theta;</div>
+								<div class="memory-tile" var="\omega" latex-to-write='\omega'>&omega;</div>
+								<div class="memory-tile" var="t">t</div>
+							</div>
+
+							<div class="contiguous">
+								<div class="memory-tile" var="u">u</div>
+								<div class="memory-tile" var="v">v</div>
+								<div class="memory-tile" var="w">w</div>
+							</div>
+
+							<div class="mobile-hide-inline-block contiguous">
+								<div class="memory-tile" var="m">m</div>
+								<div class="memory-tile" var="n">n</div>
+								<div class="memory-tile" var="k">k</div>
+							</div>
+
+							<div class="mobile-hide-inline-block contiguous">
+								<div class="memory-tile" var="x_1">x<sub>1</sub></div>
+								<div class="memory-tile" var="x_2">x<sub>2</sub></div>
+								<div class="memory-tile" var="x_3">x<sub>3</sub></div>
+							</div>
+
+							<div class="mobile-hide-inline-block contiguous">
+								<div class="memory-tile" var="y_1">y<sub>1</sub></div>
+								<div class="memory-tile" var="y_2">y<sub>2</sub></div>
+								<div class="memory-tile" var="y_3">y<sub>3</sub></div>
+							</div>
+
+							<div class="mobile-hide-inline-block contiguous">
+								<div class="memory-tile" var="t_1">t<sub>1</sub></div>
+								<div class="memory-tile" var="t_2">t<sub>2</sub></div>
+								<div class="memory-tile" var="t_3">t<sub>3</sub></div>
+							</div>
+
+							<p class="memory-tip"><strong>Memory</strong><span class="mobile-hide"> &nbsp;|&nbsp; Right
+									click a variable to assign, left click to reuse.</span></p>
+						</div>
+
+						<div id="config">
+							<h3>Configuration</h3>
+							<p class="config-tip"
+								title="Normally, the calculator keeps track of the number of sig figs in each number but doesn't actually
+	reduce their precision during arithmetic operations. The numbers are only rounded under the conditions specified below.">
+								<span class="mobile-hide"><strong>Significant Figures</strong> - </span>When to round
+								numbers?
+							</p>
+							<form action="" id="config-sf">
+								<fieldset>
+									<input name="sf" type="radio" id="sf-c1" class="active" value="1" />
+									<label for="sf-c1" class="active"
+										title="Rounds the number after every single operation. Note that this may give inaccurate final results.">After
+										each operation</label>
+								</fieldset>
+								<fieldset>
+									<input name="sf" type="radio" id="sf-c2" class="active" value="2" checked="true" />
+									<label for="sf-c2" class="active" title="Rounds when the operator type changes, e.g. from + to * or from / to -.
+	Note that + and - are considered to be in the same type, and so are *, / and mod. This is the default option.">
+										When the operator type changes
+									</label>
+								</fieldset>
+								<fieldset>
+									<input name="sf" type="radio" id="sf-c0" class="active" value="0" />
+									<label for="sf-c0" class="active" title="Under this mode, the calculator does not round at all during the process of computation 
+	and only actually rounds numbers after all operations have completed.">After all operations have completed</label>
+								</fieldset>
+								<fieldset>
+									<input name="sf" type="radio" id="sf-c-1" class="active" value="-1" />
+									<label for="sf-c-1" class="active"
+										title="Choose this to totally disable the sig fig engine. All numbers will be treated as infinitely precise (otherwise specificable using #)">Turn
+										sig figs off</label>
+								</fieldset>
+							</form>
+						</div>
+						<div id="periodic-table">
+							<table>
+								<tr>
+									<td class="table-spacer"></td>
+									<th title="Alkali metal">1</th>
+									<th title="Alkaline earth metal">2</th>
+									<th title="Group 3 element">3</th>
+									<th title="Group 4 element">4</th>
+									<th title="Group 5 element">5</th>
+									<th title="Group 6 element">6</th>
+									<th title="Group 7 element">7</th>
+									<th title="Group 8 element">8</th>
+									<th title="Group 9 element">9</th>
+									<th title="Group 10 element">10</th>
+									<th title="Coinage metal">11</th>
+									<th title="Group 12 element">12</th>
+									<th title="Boron group">13</th>
+									<th title="Carbon group">14</th>
+									<th title="Pnictogen">15</th>
+									<th title="Chalcogen">16</th>
+									<th title="Halogen">17</th>
+									<th title="Noble gas">18</th>
+								</tr>
+								<tr>
+									<th title="Period 1 element">1</th>
+									<td title="Hydrogen"><span class="elem-num">1</span><span class="elem-name">H</span>
+									</td>
+									<td colspan="16" class="table-spacer"></td>
+									<td title="Helium"><span class="elem-num">2</span><span class="elem-name">He</span>
+									</td>
+									<td colspan="1" class="table-spacer"></td>
+									<td title="Enter number 0" class="ptable-key"><span class="elem-name">0</span></td>
+									<td title="Escape superscript (charge)/subscript (number) level"
+										keys-to-type="Spacebar" class="ptable-esc ptable-key">&#10144;</td>
+									<td title="Backspace" keys-to-type="Backspace" class="ptable-backspace ptable-key">
+										&#9003;</td>
+								</tr>
+								<tr>
+									<th title="Period 2 element">2</th>
+									<td title="Lithium"><span class="elem-num">3</span><span class="elem-name">Li</span>
+									</td>
+									<td title="Beryllium"><span class="elem-num">4</span><span
+											class="elem-name">Be</span></td>
+									<td colspan="10" class="table-spacer"></td>
+									<td title="Boron"><span class="elem-num">5</span><span class="elem-name">B</span>
+									</td>
+									<td title="Carbon"><span class="elem-num">6</span><span class="elem-name">C</span>
+									</td>
+									<td title="Nitrogen"><span class="elem-num">7</span><span class="elem-name">N</span>
+									</td>
+									<td title="Oxygen"><span class="elem-num">8</span><span class="elem-name">O</span>
+									</td>
+									<td title="Fluorine"><span class="elem-num">9</span><span class="elem-name">F</span>
+									</td>
+									<td title="Neon"><span class="elem-num">10</span><span class="elem-name">Ne</span>
+									</td>
+									<td colspan="1" class="table-spacer"></td>
+									<td title="Enter number 1" class="ptable-key"><span class="elem-name">1</span></td>
+									<td title="Enter number 2" class="ptable-key"><span class="elem-name">2</span></td>
+									<td title="Enter number 3" class="ptable-key"><span class="elem-name">3</span></td>
+								</tr>
+								<tr>
+									<th title="Period 3 element">3</th>
+									<td title="Sodium"><span class="elem-num">11</span><span class="elem-name">Na</span>
+									</td>
+									<td title="Magnesium"><span class="elem-num">12</span><span
+											class="elem-name">Mg</span></td>
+									<td colspan="10" class="table-spacer"></td>
+									<td title="Aluminium"><span class="elem-num">13</span><span
+											class="elem-name">Al</span></td>
+									<td title="Silicon"><span class="elem-num">14</span><span
+											class="elem-name">Si</span></td>
+									<td title="Phosphorus"><span class="elem-num">15</span><span
+											class="elem-name">P</span></td>
+									<td title="Sulfur"><span class="elem-num">16</span><span class="elem-name">S</span>
+									</td>
+									<td title="Chlorine"><span class="elem-num">17</span><span
+											class="elem-name">Cl</span></td>
+									<td title="Argon"><span class="elem-num">18</span><span class="elem-name">Ar</span>
+									</td>
+									<td colspan="1" class="table-spacer"></td>
+									<td title="Enter number 4" class="ptable-key"><span class="elem-name">4</span></td>
+									<td title="Enter number 5" class="ptable-key"><span class="elem-name">5</span></td>
+									<td title="Enter number 6" class="ptable-key"><span class="elem-name">6</span></td>
+								</tr>
+								<tr>
+									<th title="Period 4 element">4</th>
+									<td title="Potassium"><span class="elem-num">19</span><span
+											class="elem-name">K</span></td>
+									<td title="Calcium"><span class="elem-num">20</span><span
+											class="elem-name">Ca</span></td>
+									<td title="Scandium"><span class="elem-num">21</span><span
+											class="elem-name">Sc</span></td>
+									<td title="Titanium"><span class="elem-num">22</span><span
+											class="elem-name">Ti</span></td>
+									<td title="Vanadium"><span class="elem-num">23</span><span
+											class="elem-name">V</span></td>
+									<td title="Chromium"><span class="elem-num">24</span><span
+											class="elem-name">Cr</span></td>
+									<td title="Manganese"><span class="elem-num">25</span><span
+											class="elem-name">Mn</span></td>
+									<td title="Iron"><span class="elem-num">26</span><span class="elem-name">Fe</span>
+									</td>
+									<td title="Cobalt"><span class="elem-num">27</span><span class="elem-name">Co</span>
+									</td>
+									<td title="Nickel"><span class="elem-num">28</span><span class="elem-name">Ni</span>
+									</td>
+									<td title="Copper"><span class="elem-num">29</span><span class="elem-name">Cu</span>
+									</td>
+									<td title="Zinc"><span class="elem-num">30</span><span class="elem-name">Zn</span>
+									</td>
+									<td title="Gallium"><span class="elem-num">31</span><span
+											class="elem-name">Ga</span></td>
+									<td title="Germanium"><span class="elem-num">32</span><span
+											class="elem-name">Ge</span></td>
+									<td title="Arsenic"><span class="elem-num">33</span><span
+											class="elem-name">As</span></td>
+									<td title="Selenium"><span class="elem-num">34</span><span
+											class="elem-name">Se</span></td>
+									<td title="Bromine"><span class="elem-num">35</span><span
+											class="elem-name">Br</span></td>
+									<td title="Krypton"><span class="elem-num">36</span><span
+											class="elem-name">Kr</span></td>
+									<td colspan="1" class="table-spacer"></td>
+									<td title="Enter number 7" class="ptable-key"><span class="elem-name">7</span></td>
+									<td title="Enter number 8" class="ptable-key"><span class="elem-name">8</span></td>
+									<td title="Enter number 9" class="ptable-key"><span class="elem-name">9</span></td>
+								</tr>
+								<tr>
+									<th title="Period 5 element">5</th>
+									<td title="Rubidium"><span class="elem-num">37</span><span
+											class="elem-name">Rb</span></td>
+									<td title="Strontium"><span class="elem-num">38</span><span
+											class="elem-name">Sr</span></td>
+									<td title="Yttrium"><span class="elem-num">39</span><span class="elem-name">Y</span>
+									</td>
+									<td title="Zirconium"><span class="elem-num">40</span><span
+											class="elem-name">Zr</span></td>
+									<td title="Niobium"><span class="elem-num">41</span><span
+											class="elem-name">Nb</span></td>
+									<td title="Molybdenum"><span class="elem-num">42</span><span
+											class="elem-name">Mo</span></td>
+									<td title="Technetium"><span class="elem-num">43</span><span
+											class="elem-name">Tc</span></td>
+									<td title="Ruthenium"><span class="elem-num">44</span><span
+											class="elem-name">Ru</span></td>
+									<td title="Rhodium"><span class="elem-num">45</span><span
+											class="elem-name">Rh</span></td>
+									<td title="Palladium"><span class="elem-num">46</span><span
+											class="elem-name">Pd</span></td>
+									<td title="Silver"><span class="elem-num">47</span><span class="elem-name">Ag</span>
+									</td>
+									<td title="Cadmium"><span class="elem-num">48</span><span
+											class="elem-name">Cd</span></td>
+									<td title="Indium"><span class="elem-num">49</span><span class="elem-name">In</span>
+									</td>
+									<td title="Tin"><span class="elem-num">50</span><span class="elem-name">Sn</span>
+									</td>
+									<td title="Antimony"><span class="elem-num">51</span><span
+											class="elem-name">Sb</span></td>
+									<td title="Tellurium"><span class="elem-num">52</span><span
+											class="elem-name">Te</span></td>
+									<td title="Iodine"><span class="elem-num">53</span><span class="elem-name">I</span>
+									</td>
+									<td title="Xenon"><span class="elem-num">54</span><span class="elem-name">Xe</span>
+									</td>
+									<td colspan="1" class="table-spacer"></td>
+									<td title="Minus sign (Negative charge marker)" class="ptable-key"><span
+											class="elem-name">-</span></td>
+									<td title="Specify charge (Superscript) NOTE: to balance redox eq's, add H2O/H+/OH- to appropriate sides."
+										latex-to-write="^{}" shift="-1" class="ptable-key">x<sup>+-</sup></td>
+									<td title="Specify number of items (Subscript) NOTE: this is optional, just appending numbers to elements works too."
+										latex-to-write="_{}" shift="-1" class="ptable-key">x<sub>#</sub></td>
+
+
+
+								</tr>
+								<tr>
+									<th title="Period 6 element">6</th>
+									<td title="Caesium"><span class="elem-num">55</span><span
+											class="elem-name">Cs</span></td>
+									<td title="Barium"><span class="elem-num">56</span><span class="elem-name">Ba</span>
+									</td>
+									<td title="Lanthanides"><span class="elem-num elem-expand">*</span><span
+											class="elem-name elem-expand">La</span></td>
+									<td title="Hafnium"><span class="elem-num">72</span><span
+											class="elem-name">Hf</span></td>
+									<td title="Tantalum"><span class="elem-num">73</span><span
+											class="elem-name">Ta</span></td>
+									<td title="Tungsten"><span class="elem-num">74</span><span
+											class="elem-name">W</span></td>
+									<td title="Rhenium"><span class="elem-num">75</span><span
+											class="elem-name">Re</span></td>
+									<td title="Osmium"><span class="elem-num">76</span><span class="elem-name">Os</span>
+									</td>
+									<td title="Iridium"><span class="elem-num">77</span><span
+											class="elem-name">Ir</span></td>
+									<td title="Platinum"><span class="elem-num">78</span><span
+											class="elem-name">Pt</span></td>
+									<td title="Gold"><span class="elem-num">79</span><span class="elem-name">Au</span>
+									</td>
+									<td title="Mercury (element)"><span class="elem-num">80</span><span
+											class="elem-name">Hg</span></td>
+									<td title="Thallium"><span class="elem-num">81</span><span
+											class="elem-name">Tl</span></td>
+									<td title="Lead"><span class="elem-num">82</span><span class="elem-name">Pb</span>
+									</td>
+									<td title="Bismuth"><span class="elem-num">83</span><span
+											class="elem-name">Bi</span></td>
+									<td title="Polonium"><span class="elem-num">84</span><span
+											class="elem-name">Po</span></td>
+									<td title="Astatine"><span class="elem-num">85</span><span
+											class="elem-name">At</span></td>
+									<td title="Radon"><span class="elem-num">86</span><span class="elem-name">Rn</span>
+									</td>
+
+									<td colspan="1" class="table-spacer"></td>
+									<td title="Plus sign (Compound separator/positive charge marker)"
+										class="ptable-key"><span class="elem-name">+</span></td>
+									<td title="Equal sign (Reactant/product separator)" class="ptable-key"><span
+											class="elem-name">=</span></td>
+									<td title="Start/end of formula" class="ptable-key"><span
+											class="elem-name">&quot;</span></td>
+								</tr>
+								<tr>
+									<th title="Period 7 element">7</th>
+									<td title="Francium"><span class="elem-num">87</span><span
+											class="elem-name">Fr</span></td>
+									<td title="Radium"><span class="elem-num">88</span><span class="elem-name">Ra</span>
+									</td>
+									<td title="Actinides"><span class="elem-num elem-expand">**</span><span
+											class="elem-name elem-expand">Ac</span></td>
+									<td title="Rutherfordium"><span class="elem-num">104</span><span
+											class="elem-name">Rf</span></td>
+									<td title="Dubnium"><span class="elem-num">105</span><span
+											class="elem-name">Db</span></td>
+									<td title="Seaborgium"><span class="elem-num">106</span><span
+											class="elem-name">Sg</span></td>
+									<td title="Bohrium"><span class="elem-num">107</span><span
+											class="elem-name">Bh</span></td>
+									<td title="Hassium"><span class="elem-num">108</span><span
+											class="elem-name">Hs</span></td>
+									<td title="Meitnerium"><span class="elem-num">109</span><span
+											class="elem-name">Mt</span></td>
+									<td title="Darmstadtium"><span class="elem-num">110</span><span
+											class="elem-name">Ds</span></td>
+									<td title="Roentgenium"><span class="elem-num">111</span><span
+											class="elem-name">Rg</span></td>
+									<td title="Copernicium"><span class="elem-num">112</span><span
+											class="elem-name">Cn</span></td>
+									<td title="Ununtrium"><span class="elem-num">113</span><span
+											class="elem-name">Uut</span></td>
+									<td title="Flerovium"><span class="elem-num">114</span><span
+											class="elem-name">Fl</span></td>
+									<td title="Ununpentium"><span class="elem-num">115</span><span
+											class="elem-name">Uup</span></td>
+									<td title="Livermorium"><span class="elem-num">116</span><span
+											class="elem-name">Lv</span></td>
+									<td title="Ununseptium"><span class="elem-num">117</span><span
+											class="elem-name">Uus</span></td>
+									<td title="Ununoctium"><span class="elem-num">118</span><span
+											class="elem-name">Uuo</span></td>
+
+									<td colspan="1" class="table-spacer"></td>
+									<td class="ptable-key"
+										title="Left bracket (For entering polyatomic ions, hydrates, etc.)"><span
+											class="elem-name">(</span></td>
+									<td class="ptable-key"
+										title="Right bracket (For entering polyatomic ions, hydrates, etc.)"><span
+											class="elem-name">)</span></td>
+									<td class="ptable-key" latex-to-write='molmass\left("\right)' shift="-1"
+										title="Get the molar mass of an element or compound">mass</td>
+
+								</tr>
+								<tr>
+									<th colspan="4">* Lanthanides<br /></th>
+									<td title="Lanthanum"><span class="elem-num">57</span><span
+											class="elem-name">La</span></td>
+									<td title="Cerium"><span class="elem-num">58</span><span class="elem-name">Ce</span>
+									</td>
+									<td title="Praseodymium"><span class="elem-num">59</span><span
+											class="elem-name">Pr</span></td>
+									<td title="Neodymium"><span class="elem-num">60</span><span
+											class="elem-name">Nd</span></td>
+									<td title="Promethium"><span class="elem-num">61</span><span
+											class="elem-name">Pm</span></td>
+									<td title="Samarium"><span class="elem-num">62</span><span
+											class="elem-name">Sm</span></td>
+									<td title="Europium"><span class="elem-num">63</span><span
+											class="elem-name">Eu</span></td>
+									<td title="Gadolinium"><span class="elem-num">64</span><span
+											class="elem-name">Gd</span></td>
+									<td title="Terbium"><span class="elem-num">65</span><span
+											class="elem-name">Tb</span></td>
+									<td title="Dysprosium"><span class="elem-num">66</span><span
+											class="elem-name">Dy</span></td>
+									<td title="Holmium"><span class="elem-num">67</span><span
+											class="elem-name">Ho</span></td>
+									<td title="Erbium"><span class="elem-num">68</span><span class="elem-name">Er</span>
+									</td>
+									<td title="Thulium"><span class="elem-num">69</span><span
+											class="elem-name">Tm</span></td>
+									<td title="Ytterbium"><span class="elem-num">70</span><span
+											class="elem-name">Yb</span></td>
+									<td title="Lutetium"><span class="elem-num">71</span><span
+											class="elem-name">Lu</span></td>
+
+									<td colspan="1" class="table-spacer"></td>
+									<td class="ptable-key" latex-to-write='Ka\left("\right)' shift="-1"
+										title="Get the Ka of an acid">K<sub>a</sub></td>
+									<td class="ptable-key" latex-to-write='Kb\left("\right)' shift="-1"
+										title="Get the Kb of a base">K<sub>b</sub></td>
+									<td class="ptable-key" latex-to-write='Ksp\left("\right)' shift="-1"
+										title="Get the Ksp of a salt">K<sub>sp</sub></td>
+								</tr>
+								<tr>
+									<th colspan="4">** Actinides<br /></th>
+									<td title="Actinium"><span class="elem-num">89</span><span
+											class="elem-name">Ac</span></td>
+									<td title="Thorium"><span class="elem-num">90</span><span
+											class="elem-name">Th</span></td>
+									<td title="Protactinium"><span class="elem-num">91</span><span
+											class="elem-name">Pa</span></td>
+									<td title="Uranium"><span class="elem-num">92</span><span class="elem-name">U</span>
+									</td>
+									<td title="Neptunium"><span class="elem-num">93</span><span
+											class="elem-name">Np</span></td>
+									<td title="Plutonium"><span class="elem-num">94</span><span
+											class="elem-name">Pu</span></td>
+									<td title="Americium"><span class="elem-num">95</span><span
+											class="elem-name">Am</span></td>
+									<td title="Curium"><span class="elem-num">96</span><span class="elem-name">Cm</span>
+									</td>
+									<td title="Berkelium"><span class="elem-num">97</span><span
+											class="elem-name">Bk</span></td>
+									<td title="Californium"><span class="elem-num">98</span><span
+											class="elem-name">Cf</span></td>
+									<td title="Einsteinium"><span class="elem-num">99</span><span
+											class="elem-name">Es</span></td>
+									<td title="Fermium"><span class="elem-num">100</span><span
+											class="elem-name">Fm</span></td>
+									<td title="Mendelevium"><span class="elem-num">101</span><span
+											class="elem-name">Md</span></td>
+									<td title="Nobelium"><span class="elem-num">102</span><span
+											class="elem-name">No</span></td>
+									<td title="Lawrencium"><span class="elem-num">103</span><span
+											class="elem-name">Lr</span></td>
+
+									<td colspan="1" class="table-spacer"></td>
+									<!-- <td class="ptable-key" latex-to-write='soluble\left("\right)' shift="-1"
+										title="Find if a binary salt is soluble (> 0.1 M)">solu</td> -->
+									<!-- <td class="ptable-key" latex-to-write='charge\left("\right)' shift="-1"
+										title="Find the common charge values of an ion (elemental or polyatomic)">chrg
+									</td> -->
+									<!-- <td class="ptable-key" latex-to-write='balance\left("\right)' shift="-1"
+										title="Balance a chemical equation of the form A ... B = C ... D (= may be replaced with >, ->, or <->)">
+										&#9878;</td> -->
+								</tr>
+							</table>
+							<div id="periodic-table-close">&times;</div>
+						</div>
+
+					</section>
+				</article>
+
+			</div> <!-- #main -->
+		</div> <!-- #main-container -->
+
+		<!-- <div class="footer-container">
+			<footer class="wrapper">
+				<h3>Hexane.tk &copy; Alex Yu 2017. All rights reserved.</h3>
+			</footer>
+		</div> -->
+	</div>
+	<script type="text/javascript">
+		!function (d, c) { "object" == typeof module && module.exports ? module.exports = c() : "function" == typeof define && define.amd ? define(c) : d.Spinner = c() }(this, function () { function D(f, e) { var h, g = document.createElement(f || "div"); for (h in e) { g[h] = e[h] } return g } function C(e) { for (var d = 1, f = arguments.length; f > d; d++) { e.appendChild(arguments[d]) } return e } function B(G, F, E, o) { var n = ["opacity", F, ~~(100 * G), E, o].join("-"), m = 0.01 + E / o * 100, l = Math.max(1 - (1 - G) / F * (100 - m), G), k = u.substring(0, u.indexOf("Animation")).toLowerCase(), j = k && "-" + k + "-" || ""; return r[n] || (t.insertRule("@" + j + "keyframes " + n + "{0%{opacity:" + l + "}" + m + "%{opacity:" + G + "}" + (m + 0.01) + "%{opacity:1}" + (m + F) % 100 + "%{opacity:" + G + "}100%{opacity:" + l + "}}", t.cssRules.length), r[n] = 1), n } function A(g, f) { var j, i, h = g.style; if (f = f.charAt(0).toUpperCase() + f.slice(1), void 0 !== h[f]) { return f } for (i = 0; i < s.length; i++) { if (j = s[i] + f, void 0 !== h[j]) { return j } } } function z(e, d) { for (var f in d) { e.style[A(e, f) || f] = d[f] } return e } function y(f) { for (var e = 1; e < arguments.length; e++) { var h = arguments[e]; for (var g in h) { void 0 === f[g] && (f[g] = h[g]) } } return f } function x(d, c) { return "string" == typeof d ? d : d[c % d.length] } function w(b) { this.opts = y(b || {}, w.defaults, q) } function v() { function a(d, e) { return D("<" + d + ' xmlns="urn:schemas-microsoft.com:vml" class="spin-vml">', e) } t.addRule(".spin-vml", "behavior:url(#default#VML)"), w.prototype.lines = function (G, F) { function E() { return z(a("group", { coordsize: e + " " + e, coordorigin: -g + " " + -g }), { width: e, height: e }) } function o(d, j, f) { C(b, C(z(E(), { rotation: 360 / F.lines * d + "deg", left: ~~j }), C(z(a("roundrect", { arcsize: F.corners }), { width: g, height: F.scale * F.width, left: F.scale * F.radius, top: -F.scale * F.width >> 1, filter: f }), a("fill", { color: x(F.color, d), opacity: F.opacity }), a("stroke", { opacity: 0 })))) } var n, g = F.scale * (F.length + F.width), e = 2 * F.scale * g, c = -(F.width + F.length) * F.scale * 2 + "px", b = z(E(), { position: "absolute", top: c, left: c }); if (F.shadow) { for (n = 1; n <= F.lines; n++) { o(n, -2, "progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)") } } for (n = 1; n <= F.lines; n++) { o(n) } return C(G, b) }, w.prototype.opacity = function (g, f, j, i) { var h = g.firstChild; i = i.shadow && i.lines || 0, h && f + i < h.childNodes.length && (h = h.childNodes[f + i], h = h && h.firstChild, h = h && h.firstChild, h && (h.opacity = j)) } } var u, t, s = ["webkit", "Moz", "ms", "O"], r = {}, q = { lines: 12, length: 7, width: 5, radius: 10, scale: 1, corners: 1, color: "#000", opacity: 0.25, rotate: 0, direction: 1, speed: 1, trail: 100, fps: 20, zIndex: 2000000000, className: "spinner", top: "50%", left: "50%", shadow: !1, hwaccel: !1, position: "absolute" }; if (w.defaults = {}, y(w.prototype, { spin: function (M) { this.stop(); var L = this, K = L.opts, J = L.el = D(null, { className: K.className }); if (z(J, { position: K.position, width: 0, zIndex: K.zIndex, left: K.left, top: K.top }), M && M.insertBefore(J, M.firstChild || null), J.setAttribute("role", "progressbar"), L.lines(J, L.opts), !u) { var I, H = 0, G = (K.lines - 1) * (1 - K.direction) / 2, F = K.fps, E = F / K.speed, j = (1 - K.opacity) / (E * K.trail / 100), e = E / K.lines; !function a() { H++; for (var b = 0; b < K.lines; b++) { I = Math.max(1 - (H + (K.lines - b) * e) % E * j, K.opacity), L.opacity(J, b * K.direction + G, I, K) } L.timeout = L.el && setTimeout(a, ~~(1000 / F)) }() } return L }, stop: function () { var b = this.el; return b && (clearTimeout(this.timeout), b.parentNode && b.parentNode.removeChild(b), this.el = void 0), this }, lines: function (j, g) { function e(d, f) { return z(D(), { position: "absolute", width: g.scale * (g.length + g.width) + "px", height: g.scale * g.width + "px", background: d, boxShadow: f, transformOrigin: "left", transform: "rotate(" + ~~(360 / g.lines * b + g.rotate) + "deg) translate(" + g.scale * g.radius + "px,0)", borderRadius: (g.corners * g.scale * g.width >> 1) + "px" }) } for (var c, b = 0, a = (g.lines - 1) * (1 - g.direction) / 2; b < g.lines; b++) { c = z(D(), { position: "absolute", top: 1 + ~(g.scale * g.width / 2) + "px", transform: g.hwaccel ? "translate3d(0,0,0)" : "", opacity: g.opacity, animation: u && B(g.opacity, g.trail, a + b * g.direction, g.lines) + " " + 1 / g.speed + "s linear infinite" }), g.shadow && C(c, z(e("#000", "0 0 4px #000"), { top: "2px" })), C(j, C(c, e(x(g.color, b), "0 0 1px rgba(0,0,0,.1)"))) } return j }, opacity: function (e, d, f) { d < e.childNodes.length && (e.childNodes[d].style.opacity = f) } }), "undefined" != typeof document) { t = function () { var a = D("style", { type: "text/css" }); return C(document.getElementsByTagName("head")[0], a), a.sheet || a.styleSheet }(); var p = z(D("group"), { behavior: "url(#default#VML)" }); !A(p, "transform") && p.adj ? v() : u = A(p, "animation") } return w }); (function () { var a = { lines: 6, length: 28, width: 14, radius: 42, scale: 0.45, corners: 1, color: "#3533a9", opacity: 0.1, rotate: 0, direction: 1, speed: 1, trail: 60, fps: 20, zIndex: 2000000000, className: "spinner", top: "50vh", left: "50%", shadow: false, hwaccel: false, position: "absolute" }; var b = document.getElementById("loading-spinner"); var c = new Spinner(a).spin(b) })();
+	</script>
+
+	<script src="js/production.js" type="text/javascript" defer></script>
+</body>
+
+</html>

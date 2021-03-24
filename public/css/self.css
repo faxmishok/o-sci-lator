@@ -1,3 +1,8 @@
+html {
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
 #file-upload {
   height: 30%;
   background-color: #58478c;
@@ -81,13 +86,12 @@ input:focus + label {
 
 HOME BACK **************
 */
-.home-btn{
 
+/* #home-btn {
+} */
 
-}
-
-a {
-  top:11px;
+.home-btn a {
+  top: 11px;
   right: 11px;
   position: relative;
   display: block;
@@ -102,7 +106,7 @@ a {
   transition: 0.5s;
 }
 
-a:before {
+.home-btn a:before {
   content: '';
   position: absolute;
   top: 20px;
@@ -116,16 +120,14 @@ a:before {
   z-index: -1;
 }
 
-a:hover:before {
+.home-btn a:hover:before {
   transform: scale(1.2);
   box-shadow: 0 0 15px #280d43;
   filter: blur(3px);
 }
 
-a:hover {
+.home-btn a:hover {
   color: #1d0932;
   box-shadow: 0 0 15px #280d43;
   text-shadow: 0 0 15px #280d43;
 }
-
-

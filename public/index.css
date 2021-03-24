@@ -1,10 +1,14 @@
+html {
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   background: #04021f;
-  -webkit-user-select: none;
 }
 
 .navlist {
@@ -57,17 +61,17 @@ a.navlinks:hover {
     background-color: #0d0f33;
   }
   to {
-    background-color: #f24648;
+    background-color: #ff4949;
   }
 
   0% {
     background-color: #0d0f33;
   }
   25% {
-    background-color: #f24648;
+    background-color: #ff4949;
   }
   50% {
-    background-color: #f24648;
+    background-color: #ff4949;
   }
   100% {
     background-color: #0d0f33;
@@ -85,7 +89,7 @@ a.navlinks:hover {
   text-transform: uppercase;
   font-size: 20px;
   font-weight: bold;
-  color: #f24648;
+  color: #ff4949;
 
   margin: 0;
   position: absolute;
@@ -110,7 +114,7 @@ a.navlinks:hover {
   margin: 0;
   height: 460px;
   display: flex;
-  background-color: #f24648;
+  background-color: #ff4949;
 }
 
 #conleft,
