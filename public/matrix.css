@@ -1,0 +1,22 @@
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.input-group {
+  display: flex;
+}
+.input-group input {
+  width: 10%;
+  margin-right: 5px;
+}
+.firstInput {
+  width: 10%;
+}
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.parent-container {
+  width: 30%;
+}
