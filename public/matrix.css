@@ -44,3 +44,18 @@ input::-webkit-inner-spin-button {
   width: 20%;
   font-size: 25px;
 }
+
+.customResult{
+  display: table;
+  padding-top: 15px;
+  padding-left: 360px;
+}
+
+
+.customResult div span{
+
+  padding: 1px 11px 1px 11px;
+  margin: 5px;
+  font-size: 22px;
+  border: 1px solid black;
+}
