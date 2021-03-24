@@ -160,8 +160,6 @@
 										processData: false,
 										contentType: false,
 										success: function (response) {
-											// document.getElementsByClassName("mq-root-block")[0].innerHTML = response.data[1].value;
-											// console.log('bura girir');
 											window.location = `/ocr.html?expr=${response.data[1].value}`
 										},
 										error: function (jqXHR, textStatus, errorMessage) {
