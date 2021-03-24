@@ -1,3 +1,5 @@
+// const { doc } = require("prettier");
+
 $(document).ready(function () {
   var res = document.querySelectorAll('.mainClick');
 
@@ -85,6 +87,22 @@ $(document).ready(function () {
       processData: false,
       contentType: 'application/json',
       success: function (response) {
+        console.log(response);
+        var resultArr = document.querySelector('.customResult');
+        resultArr.innerHTML = ' ';
+        for (let i = 0; i < response.result.length; i++) {
+          var row = document.createElement("div");
+
+          for (let j = 0; j < response.result[i].length; j++) {
+            var column = document.createElement("span");
+            column.innerHTML = `${response.result[i][j]}`;
+            row.appendChild(column);
+
+
+
+          }
+          resultArr.appendChild(row);
+        }
         // document.querySelector;
       },
       error: function (jqXHR, textStatus, errorMessage) {
