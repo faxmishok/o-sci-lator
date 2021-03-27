@@ -16,6 +16,12 @@
 </head>
 
 <body>
+
+    <div class="header-container">
+        <header>
+            <h1>Matrix Calculator</h1>
+        </header>
+    </div>
     <div class="container">
         <div class="dropdown">
             <select name="matrixValue" class="form-control customFirstSelect" id="matrixValue">
@@ -27,90 +33,91 @@
 
 
     </div>
-    <div class="container">
+    <div class="main-container">
+        <div class="container">
 
-        <div class="flex-container">
+            <div class="flex-container">
 
-            <div class="parent-container">
+                <div class="parent-container">
 
-                <div class="well well-lg">
+                    <div class="well well-lg">
 
-                    <form id="inputField" role="form">
-                        <div class="input-group">
-                            <input type="number" class="firstInput" name="field00" size="3">
-                            <input type="number" class="firstInput" name="field01" size="3">
-                            <input type="number" class="firstInput" name="field02" size="3">
-                        </div>
+                        <form id="inputField" role="form">
+                            <div class="input-group">
+                                <input type="number" class="firstInput" name="field00" size="3">
+                                <input type="number" class="firstInput" name="field01" size="3">
+                                <input type="number" class="firstInput" name="field02" size="3">
+                            </div>
 
-                        <div class="input-group">
-                            <input type="number" class="firstInput" name="field10" size="3">
-                            <input type="number" class="firstInput" name="field11" size="3">
-                            <input type="number" class="firstInput" name="field12" size="3">
-                        </div>
+                            <div class="input-group">
+                                <input type="number" class="firstInput" name="field10" size="3">
+                                <input type="number" class="firstInput" name="field11" size="3">
+                                <input type="number" class="firstInput" name="field12" size="3">
+                            </div>
 
-                        <div class="input-group">
-                            <input type="number" class="firstInput" name="field20" size="3">
-                            <input type="number" class="firstInput" name="field21" size="3">
-                            <input type="number" class="firstInput" name="field22" size="3">
-                        </div>
+                            <div class="input-group">
+                                <input type="number" class="firstInput" name="field20" size="3">
+                                <input type="number" class="firstInput" name="field21" size="3">
+                                <input type="number" class="firstInput" name="field22" size="3">
+                            </div>
 
-                        <br>
-                        <input type="button" value="calculate" name="calculate" class="btn mainClick btn-info">
-                    </form>
-                    <div id="resultField">
+                            <br>
+                            <input type="button" value="calculate" name="calculate" class="btn mainClick btn-info">
+                        </form>
+
+
+                    </div>
+
+                </div>
+                <div class="parent-container">
+
+                    <select class="customOperation form-control">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">×</option>
+                        <option value="/">/</option>
+                        <!-- <option value="det">Determinant</option>
+                        <option value="diag">Diagonal</option>
+                        <option value="det">Determinant</option>
+                        <option value="det">Determinant</option> -->
+                    </select>
+
+                </div>
+
+                <div class="parent-container">
+
+                    <div class="well well-lg">
+                        <form id="inputField" class="lastAttr" role="form">
+                            <div class="input-group">
+                                <input type="number" class="secondInput" name="field00" size="3">
+                                <input type="number" class="secondInput" name="field01" size="3">
+                                <input type="number" class="secondInput" name="field02" size="3">
+                            </div>
+
+                            <div class="input-group">
+                                <input type="number" class="secondInput" name="field10" size="3">
+                                <input type="number" class="secondInput" name="field11" size="3">
+                                <input type="number" class="secondInput" name="field12" size="3">
+                            </div>
+
+                            <div class="input-group">
+                                <input type="number" class="secondInput" name="field20" size="3">
+                                <input type="number" class="secondInput" name="field21" size="3">
+                                <input type="number" class="secondInput" name="field22" size="3">
+                            </div>
+
+
+                        </form>
 
                     </div>
 
                 </div>
 
             </div>
-            <div class="parent-container">
-
-                <select class="customOperation form-control">
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                    <option value="*">×</option>
-                    <option value="/">/</option>
-                    <!-- <option value="det">Determinant</option>
-                    <option value="diag">Diagonal</option>
-                    <option value="det">Determinant</option>
-                    <option value="det">Determinant</option> -->
-                </select>
-
-            </div>
-
-            <div class="parent-container">
-
-                <div class="well well-lg">
-                    <form id="inputField" class="lastAttr" role="form">
-                        <div class="input-group">
-                            <input type="number" class="secondInput" name="field00" size="3">
-                            <input type="number" class="secondInput" name="field01" size="3">
-                            <input type="number" class="secondInput" name="field02" size="3">
-                        </div>
-
-                        <div class="input-group">
-                            <input type="number" class="secondInput" name="field10" size="3">
-                            <input type="number" class="secondInput" name="field11" size="3">
-                            <input type="number" class="secondInput" name="field12" size="3">
-                        </div>
-
-                        <div class="input-group">
-                            <input type="number" class="secondInput" name="field20" size="3">
-                            <input type="number" class="secondInput" name="field21" size="3">
-                            <input type="number" class="secondInput" name="field22" size="3">
-                        </div>
-
-                        <input type="button" value="calculate" name="calculate" class="btn mainClick btn-info">
-                    </form>
-
-                </div>
-
-            </div>
 
         </div>
-
     </div>
+
 
     <div class="table-container">
         <table class="table table-bordered table-dark">

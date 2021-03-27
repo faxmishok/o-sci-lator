@@ -236,7 +236,7 @@ $(document).ready(function () {
               <input type="number  " class = "secondInput " name="field11" size="3">
             </div>
 
-            <input type="button"  value="calculate" name="calculate" class="btn mainClick btn-info">
+            
           `;
         }
 
@@ -290,7 +290,7 @@ $(document).ready(function () {
               <input type="number" class="secondInput" name="field01" size="3">
               <input type="number" class="secondInput  name="field11" size="3">
             </div>
-            <input type="button"  value="calculate" name="calculate" class="btn mainClick btn-info">
+            
           `;
         }
 
@@ -361,7 +361,7 @@ $(document).ready(function () {
               <input type="number" class="secondInput"  name="field11" size="3">
             </div>
 
-            <input type="button"  value="calculate" name="calculate" class="btn mainClick btn-info">
+            
           `;
         }
 
