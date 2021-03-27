@@ -1,3 +1,7 @@
+body {
+  background-color: #0d0f33;
+}
+
 .flex-container {
   display: flex;
   justify-content: space-evenly;
@@ -30,13 +34,7 @@ input::-webkit-inner-spin-button {
 .mainClick {
   margin-top: 30px;
 }
-.parent-container:first-child {
-  /* display: flex;
-  justify-content: center;
-  */
-}
-.parent-container:last-child {
-}
+
 .customOperation {
   width: 20%;
   font-size: 25px;
@@ -53,4 +51,24 @@ input::-webkit-inner-spin-button {
   margin: 5px;
   font-size: 22px;
   border: 1px solid black;
+}
+
+/* Matrix Result - Table overwrite */
+
+/* .table-container {
+} */
+
+.table,
+.table-bordered,
+.table-dark {
+  width: 100px;
+}
+
+.table-dark {
+  background-color: #0d0f33;
+}
+
+.table td,
+.table th {
+  padding: 6px 12px 6px 12px;
 }

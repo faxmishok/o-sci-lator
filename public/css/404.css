@@ -45,10 +45,6 @@ div.main-container {
   padding-left: 30px;
 }
 
-.header-container {
-  /* background-color: #0b0633; */
-}
-
 #header-special h1 {
   display: flex;
   align-items: center;

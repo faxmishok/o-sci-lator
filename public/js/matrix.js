@@ -87,10 +87,10 @@ $(document).ready(function () {
         var resultArr = document.querySelector('.customResult');
         resultArr.innerHTML = ' ';
         for (let i = 0; i < response.result.length; i++) {
-          var row = document.createElement('div');
+          var row = document.createElement('tr');
 
           for (let j = 0; j < response.result[i].length; j++) {
-            var column = document.createElement('span');
+            var column = document.createElement('td');
             column.innerHTML = `${response.result[i][j]}`;
             row.appendChild(column);
           }

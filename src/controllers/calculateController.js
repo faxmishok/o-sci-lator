@@ -45,7 +45,7 @@ exports.calculateMatrix = asyncHandler(async (req, res, next) => {
     result = mathjs.multiply(m1, invMatrix);
   }
 
-  console.log(result);
+  // console.log(result);
 
   res.status(200).json({
     success: true,
