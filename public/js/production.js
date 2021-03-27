@@ -864,7 +864,7 @@
   },
   {},
   [2, 1]
-); /*! jQuery v1.12.4 | (c) jQuery Foundation | jquery.org/license */
+);
 !(function (e, d) {
   'object' == typeof module && 'object' == typeof module.exports
     ? (module.exports = e.document
@@ -7184,11 +7184,7 @@
     n
   );
 });
-/*! SigNum.js v1.0.1: numbers supporting calculations with
- *                    significant figures
- *  Copyright 2017 Alex Yu (U-Hill Secondary)
- *  License: Apache 2.0
- *  Created for use with Hexane (hexane.tk)*/
+
 Math.log10 ||
   (Math.log10 = function (a) {
     return Math.log(a) / Math.log(10);
@@ -13120,10 +13116,7 @@ var GET = function (d) {
   (Modernizr.load = function () {
     yepnope.apply(window, [].slice.call(arguments, 0));
   });
-/*! Respond.js v1.4.2: min/max-width media query polyfill
- * Copyright 2014 Scott Jehl
- * Licensed under MIT
- * http://j.mp/respondjs */
+
 !(function (d) {
   d.matchMedia =
     d.matchMedia ||
@@ -13370,7 +13363,7 @@ var GET = function (d) {
     }
   })(this);
 var $ = jQuery;
-var Hexane = new (function () {
+var Calculator = new (function () {
   this.prevAns = [];
   this.history = [];
   this.funcs = {
@@ -13470,67 +13463,69 @@ var Hexane = new (function () {
       return SigNum.sign(d);
     },
     ka: function (d) {
-      return Hexane.funcs.Ka(d);
+      return Calculator.funcs.Ka(d);
     },
     Ka: function (d) {
-      return Hexane.data.ka[
+      return Calculator.data.ka[
         d.toString().replace('_', '').replace('{', '').replace('}', '')
       ];
     },
     pka: function (d) {
-      return Hexane.funcs.pKa(d);
+      return Calculator.funcs.pKa(d);
     },
     pKa: function (d) {
       return -SigNum.log10(
-        Hexane.data.ka[
+        Calculator.data.ka[
           d.toString().replace('_', '').replace('{', '').replace('}', '')
         ]
       );
     },
     kb: function (d) {
-      return Hexane.funcs.Kb(b);
+      return Calculator.funcs.Kb(b);
     },
     Kb: function (a) {
-      return Hexane.data.kb[
+      return Calculator.data.kb[
         a.toString().replace('_', '').replace('{', '').replace('}', '')
       ];
     },
     pkb: function (a) {
-      return Hexane.funcs.pKb(a);
+      return Calculator.funcs.pKb(a);
     },
     pKb: function (a) {
       return -SigNum.log10(
-        Hexane.data.kb[
+        Calculator.data.kb[
           a.toString().replace('_', '').replace('{', '').replace('}', '')
         ]
       );
     },
     ksp: function (a) {
-      return Hexane.funcs.Ksp(a);
+      return Calculator.funcs.Ksp(a);
     },
     Ksp: function (a) {
-      return Hexane.data.ksp[
+      return Calculator.data.ksp[
         a.toString().replace('_', '').replace('{', '').replace('}', '')
       ];
     },
     isacid: function (d) {
-      var f = Hexane.data.ka[d.toString()];
-      var e = Hexane.data.kb[d.toString()];
+      var f = Calculator.data.ka[d.toString()];
+      var e = Calculator.data.kb[d.toString()];
       return (e == null && f != null) || f > e;
     },
     elemmass: function (a) {
-      return Hexane.data.mass[a.toString()];
+      return Calculator.data.mass[a.toString()];
     },
     molmass: function (g) {
-      var f = Hexane.tokenizeChemFormula(g);
+      var f = Calculator.tokenizeChemFormula(g);
       var e = new SigNum(0, Infinity);
       for (var d = 0; d < f.length; ++d) {
         var a = f[d];
         if (a.type == 'element') {
-          e = e.plus(Hexane.data.mass[a.name].times(new SigNum(a.count)));
+          e = e.plus(Calculator.data.mass[a.name].times(new SigNum(a.count)));
         } else {
           if (a.type == 'polyatomic') {
-            e = e.plus(Hexane.funcs.molmass(a.name).times(new SigNum(a.count)));
+            e = e.plus(
+              Calculator.funcs.molmass(a.name).times(new SigNum(a.count))
+            );
           }
         }
       }
@@ -13538,12 +13533,12 @@ var Hexane = new (function () {
     },
     charge: function (e) {
       e = e.replace('_', '').replace('{', '').replace('}', '');
-      var a = Hexane.data.symbols.indexOf(e);
+      var a = Calculator.data.symbols.indexOf(e);
       var d;
       if (a >= 0) {
-        d = Hexane.data.charges[a];
+        d = Calculator.data.charges[a];
       } else {
-        d = Hexane.data.polycharges[e];
+        d = Calculator.data.polycharges[e];
       }
       if (d == null || d == undefined) {
         return null;
@@ -13560,7 +13555,7 @@ var Hexane = new (function () {
         .replace('_', '')
         .replace('{', '')
         .replace('}', '');
-      var k = Hexane.tokenizeChemFormula(j);
+      var k = Calculator.tokenizeChemFormula(j);
       if (k.length < 2) {
         return 'unknown';
       }
@@ -13576,7 +13571,7 @@ var Hexane = new (function () {
           e = j.indexOf(')') + 1;
           i = j.substring(1, e - 1);
         } else {
-          for (var d in Hexane.data.polycharges) {
+          for (var d in Calculator.data.polycharges) {
             if (j.length >= d.length && j.substring(0, d.length) == d) {
               i = d;
               e = d.length;
@@ -13609,7 +13604,7 @@ var Hexane = new (function () {
           e = j.indexOf(')') + 1;
           h = j.substring(1, e - 1);
         } else {
-          for (var d in Hexane.data.polycharges) {
+          for (var d in Calculator.data.polycharges) {
             if (j.length >= d.length && j.substring(0, d.length) == d) {
               h = d;
               e = d.length;
@@ -13637,8 +13632,8 @@ var Hexane = new (function () {
           o = 1;
         }
       }
-      var n = Hexane.funcs.charge(i);
-      var m = Hexane.funcs.charge(h);
+      var n = Calculator.funcs.charge(i);
+      var m = Calculator.funcs.charge(h);
       if (n.constructor != Array) {
         n = [n];
       }
@@ -13708,7 +13703,7 @@ var Hexane = new (function () {
       return 'unknown';
     },
     balance: function (a) {
-      return Hexane.Balance.balance(a.toString());
+      return Calculator.Balance.balance(a.toString());
     },
     random: function (e, d) {
       if (d === undefined) {
@@ -14321,9 +14316,9 @@ $(document).ready(function () {
   if (Modernizr.touch) {
     $('#editor textarea').attr('readonly', 'readonly');
   }
-  Hexane.DefaultParser = Hexane.Eval;
-  Hexane.eval = function (expr) {
-    return Hexane.DefaultParser.parse(expr);
+  Calculator.DefaultParser = Calculator.Eval;
+  Calculator.eval = function (expr) {
+    return Calculator.DefaultParser.parse(expr);
   };
   var exprFieldSpan = document.getElementById('expr-field');
   var resultSpan = document.getElementById('result-field');
@@ -14357,7 +14352,7 @@ $(document).ready(function () {
   var updateMemoryTitles = function () {
     $('.memory-tile').each(function (idx, ele) {
       $this = $(ele);
-      var val = Hexane.vars[$this.attr('var')];
+      var val = Calculator.vars[$this.attr('var')];
       if (val === undefined || val === null) {
         $this.prop('title', 'undefined');
       } else {
@@ -14372,7 +14367,7 @@ $(document).ready(function () {
         resultField.latex('0 = 0 \\cdot 10^0');
         resval = undefined;
       } else {
-        resval = Hexane.eval(exprField.latex());
+        resval = Calculator.eval(exprField.latex());
         if (resval.constructor == SigNum) {
           var res = resval.toExponential();
           res = eToExp(res);
@@ -14394,7 +14389,7 @@ $(document).ready(function () {
         updateMemoryTitles();
         if (varsLoaded) {
           try {
-            localStorage.setItem('vars', JSON.stringify(Hexane.vars));
+            localStorage.setItem('vars', JSON.stringify(Calculator.vars));
           } catch (ignore) {}
         }
       }
@@ -14428,12 +14423,12 @@ $(document).ready(function () {
                 ignoreEdit = false;
               } else {
                 if (exprField.latex() != GET('expr')) {
-                  Hexane.history = Hexane.history
+                  Calculator.history = Calculator.history
                     .concat([exprField.latex()])
                     .slice(-50);
                   history.replaceState(
                     null,
-                    'Scientific Calculator - Hexane',
+                    'Scientific Calculator - O-Sci-Lator',
                     '?expr=' + encodeURIComponent(exprField.latex())
                   );
                 }
@@ -14446,7 +14441,7 @@ $(document).ready(function () {
       },
       enter: function () {
         if (resval !== undefined && resval !== null) {
-          Hexane.prevAns = Hexane.prevAns.concat([resval]).slice(-50);
+          Calculator.prevAns = Calculator.prevAns.concat([resval]).slice(-50);
           rebuildAnsList();
         }
       },
@@ -14454,24 +14449,25 @@ $(document).ready(function () {
   });
   var saveAnsList = function () {
     var prevAnsTxt = '';
-    for (var i = 0; i < Hexane.prevAns.length; ++i) {
+    for (var i = 0; i < Calculator.prevAns.length; ++i) {
       if (i != 0) {
         prevAnsTxt += ';';
       }
-      if (Hexane.prevAns[i].constructor == SigNum) {
-        prevAnsTxt += Hexane.prevAns[i].value + ':' + Hexane.prevAns[i].sf;
+      if (Calculator.prevAns[i].constructor == SigNum) {
+        prevAnsTxt +=
+          Calculator.prevAns[i].value + ':' + Calculator.prevAns[i].sf;
       } else {
-        prevAnsTxt += Hexane.prevAns[i];
+        prevAnsTxt += Calculator.prevAns[i];
       }
     }
     localStorage.setItem('prevAns', prevAnsTxt);
   };
   var rebuildAnsList = function () {
     var txt = '';
-    for (var i = 0; i < Hexane.prevAns.length; ++i) {
-      var str = Hexane.prevAns[i].toString();
+    for (var i = 0; i < Calculator.prevAns.length; ++i) {
+      var str = Calculator.prevAns[i].toString();
       var val = str;
-      if (Hexane.prevAns[i].constructor == SigNum) {
+      if (Calculator.prevAns[i].constructor == SigNum) {
         str = eToExp(str, 'html');
         val = eToExp(val, 'latex');
       }
@@ -14521,7 +14517,7 @@ $(document).ready(function () {
         return;
       }
       var name = $this.attr('var');
-      Hexane.prevAns.splice(Number($this.attr('position')), 1);
+      Calculator.prevAns.splice(Number($this.attr('position')), 1);
       saveAnsList();
       $this.animate({ opacity: 0 }, 500, 'linear', function () {
         $this.remove();
@@ -14534,7 +14530,7 @@ $(document).ready(function () {
     });
     $('.history-delete').click(function (e) {
       var tile = $(this).parent();
-      Hexane.prevAns.splice(Number(tile.attr('position')), 1);
+      Calculator.prevAns.splice(Number(tile.attr('position')), 1);
       try {
         saveAnsList();
       } catch (ignore) {}
@@ -14546,7 +14542,7 @@ $(document).ready(function () {
       e.stopPropagation();
     });
     $('.history-clear').click(function (e) {
-      Hexane.prevAns = [];
+      Calculator.prevAns = [];
       $('.history-tile').animate({ opacity: 0 }, 400, 'linear');
       setTimeout(function () {
         rebuildAnsList();
@@ -14657,15 +14653,15 @@ $(document).ready(function () {
     }
     var name = $this.attr('var');
     if (resval !== undefined && resval !== null) {
-      Hexane.vars[name] = resval;
+      Calculator.vars[name] = resval;
       $this.attr('title', resval.toString());
     } else {
-      Hexane.vars[name] = undefined;
+      Calculator.vars[name] = undefined;
       $this.attr('title', 'undefined');
     }
     if (varsLoaded) {
       try {
-        localStorage.setItem('vars', JSON.stringify(Hexane.vars));
+        localStorage.setItem('vars', JSON.stringify(Calculator.vars));
       } catch (ignore) {}
     }
     if (!Modernizr.touch) {
@@ -14694,7 +14690,7 @@ $(document).ready(function () {
   });
   $('#enter-btn').click(function () {
     if (resval !== undefined && resval !== null) {
-      Hexane.prevAns = Hexane.prevAns.concat([resval]).slice(-50);
+      Calculator.prevAns = Calculator.prevAns.concat([resval]).slice(-50);
       rebuildAnsList();
     }
     if (!Modernizr.touch) {
@@ -14757,24 +14753,27 @@ $(document).ready(function () {
     exprField.latex(exprLatex || '');
     history.pushState(
       null,
-      'Scientific Calculator - Hexane',
+      'Scientific Calculator - O-Sci-Lator',
       '?expr=' + encodeURIComponent(exprLatex)
     );
     window.onpopstate = function () {
       ignoreEdit = true;
       exprField.latex(GET('expr') || localStorage.getItem('exprLatex') || '');
-      Hexane.history = Hexane.history.slice(0, -1);
+      Calculator.history = Calculator.history.slice(0, -1);
     };
     var prevAns = localStorage.getItem('prevAns');
     if (prevAns !== undefined && prevAns !== null && prevAns.trim() != '') {
-      Hexane.prevAns = prevAns.split(';');
-      for (var i = 0; i < Hexane.prevAns.length; ++i) {
-        if (Hexane.prevAns[i].indexOf(':') >= 0) {
-          var spl = Hexane.prevAns[i].split(':');
-          Hexane.prevAns[i] = new SigNum(Number(spl[0]), Number(spl[1]));
+      Calculator.prevAns = prevAns.split(';');
+      for (var i = 0; i < Calculator.prevAns.length; ++i) {
+        if (Calculator.prevAns[i].indexOf(':') >= 0) {
+          var spl = Calculator.prevAns[i].split(':');
+          Calculator.prevAns[i] = new SigNum(Number(spl[0]), Number(spl[1]));
         } else {
-          if (Hexane.prevAns[i] == 'true' || Hexane.prevAns[i] == 'false') {
-            Hexane.prevAns[i] = Boolean(Hexane.prevAns[i]);
+          if (
+            Calculator.prevAns[i] == 'true' ||
+            Calculator.prevAns[i] == 'false'
+          ) {
+            Calculator.prevAns[i] = Boolean(Calculator.prevAns[i]);
           }
         }
       }
@@ -14804,9 +14803,9 @@ $(document).ready(function () {
           if (sf === null) {
             sf = Infinity;
           }
-          Hexane.vars[key] = new SigNum(vars[key]['value'], sf);
+          Calculator.vars[key] = new SigNum(vars[key]['value'], sf);
         } else {
-          Hexane.vars[key] = vars[key];
+          Calculator.vars[key] = vars[key];
         }
       }
     }
@@ -14832,12 +14831,9 @@ $(document).ready(function () {
   exprField.select();
   exprField.focus();
 });
-/*! Hexane.Eval (SigNum Version): JS latex math evaluator that works with SigNum.js (dependency). Works best with latex from MathQuill.
- *  Copyright 2017 Alex Yu (U-Hill Secondary)
- *  License: Apache 2.0
- *  Created for use with Hexane (hexane.tk)*/
-Hexane || (Hexane = {});
-Hexane.Eval = (function () {
+
+Calculator || (Calculator = {});
+Calculator.Eval = (function () {
   var ab = function (at, ar, au, aq) {
       for (au = au || {}, aq = at.length; aq--; au[at[aq]] = ar) {}
       return au;
@@ -15334,45 +15330,47 @@ Hexane.Eval = (function () {
           if (az[at - 3][0] == '\\') {
             az[at - 3] = az[at - 3].substring(1);
           }
-          this.$ = Hexane.funcs[az[at - 3]].apply(undefined, az[at - 1]);
+          this.$ = Calculator.funcs[az[at - 3]].apply(undefined, az[at - 1]);
           break;
         case 48:
           if (az[at - 3][0] == '\\') {
             az[at - 3] = az[at - 3].substring(1);
           }
           this.$ =
-            az[at - 4] * Hexane.funcs[az[at - 3]].apply(undefined, az[at - 1]);
+            az[at - 4] *
+            Calculator.funcs[az[at - 3]].apply(undefined, az[at - 1]);
           break;
         case 49:
           if (az[at - 2][0] == '\\') {
             az[at - 2] = az[at - 2].substring(1);
           }
-          this.$ = Hexane.funcs[az[at - 2]].apply(undefined, []);
+          this.$ = Calculator.funcs[az[at - 2]].apply(undefined, []);
           break;
         case 50:
           if (az[at - 2][0] == '\\') {
             az[at - 2] = az[at - 2].substring(1);
           }
-          this.$ = az[at - 3] * Hexane.funcs[az[at - 2]].apply(undefined, []);
+          this.$ =
+            az[at - 3] * Calculator.funcs[az[at - 2]].apply(undefined, []);
           break;
         case 51:
-          Hexane.vars[az[at - 2]] = az[at];
-          this.$ = Hexane.vars[az[at - 2]];
+          Calculator.vars[az[at - 2]] = az[at];
+          this.$ = Calculator.vars[az[at - 2]];
           break;
         case 52:
-          this.$ = Hexane.vars[az[at]];
+          this.$ = Calculator.vars[az[at]];
           break;
         case 53:
           this.$ = az[at].toString().substring(1, az[at].toString().length - 1);
           break;
         case 54:
-          this.$ = az[at - 1].times(Hexane.vars[az[at]]);
+          this.$ = az[at - 1].times(Calculator.vars[az[at]]);
           break;
         case 55:
           this.$ = az[at - 1].times(az[at]);
           break;
         case 56:
-          this.$ = Hexane.vars[az[at - 3].concat(az[at - 1])];
+          this.$ = Calculator.vars[az[at - 3].concat(az[at - 1])];
           break;
         case 57:
           this.$ = SigNum.E;
@@ -18337,10 +18335,10 @@ Hexane.Eval = (function () {
   return new i();
 })();
 if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
-  exports.parser = Hexane.Eval;
-  exports.Parser = Hexane.Eval.Parser;
+  exports.parser = Calculator.Eval;
+  exports.Parser = Calculator.Eval.Parser;
   exports.parse = function () {
-    return Hexane.Eval.parse.apply(Hexane.Eval, arguments);
+    return Calculator.Eval.parse.apply(Calculator.Eval, arguments);
   };
   exports.main = function commonjsMain(a) {
     if (!a[1]) {
@@ -18354,415 +18352,3 @@ if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
     exports.main(process.argv.slice(1));
   }
 }
-/*! Hexane.Balance.js: JS Chemical Equation Balancer. Depends on vectorious by mateogianolio: https://github.com/mateogianolio/vectorious.
- *  Copyright 2017 Alex Yu (U-Hill Secondary)
- *  License: Apache 2.0
- *  Created for use with Hexane (hexane.tk)*/
-String.prototype.replaceAll = function (a, d) {
-  var e = this;
-  return e.replace(
-    new RegExp(a.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'), 'g'),
-    d
-  );
-};
-Hexane || (Hexane = {});
-Hexane.tokenizeChemFormula = function (m) {
-  m = m.replaceAll('\\left', '').replaceAll('\\right', '').replaceAll(']', ')');
-  var o = [];
-  m += 'E';
-  var f = '';
-  var k = null;
-  var n = null;
-  var d = false;
-  var q = [o];
-  var j = [''];
-  var e = o;
-  var a = false;
-  for (var h = 0; h < m.length; ++h) {
-    var p = m[h];
-    if ('{}'.indexOf(p) != -1) {
-      continue;
-    }
-    if (h < m.length - 1) {
-      j[j.length - 1] += p;
-    }
-    if (a && !(p >= '0' && p <= '9') && p != '_' && p != '^') {
-      a = false;
-      q.pop();
-      if (k === null) {
-        k = 1;
-      }
-      if (n === null) {
-        n = 0;
-      }
-      var g = j.pop();
-      var l = g.substring(0, g.lastIndexOf(')'));
-      q[q.length - 1].push({
-        type: 'polyatomic',
-        name: l,
-        items: e,
-        count: k,
-        charge: n,
-      });
-      j[j.length - 1] += g;
-      e = q[q.length - 1];
-      k = null;
-      d = false;
-      n = null;
-    }
-    if (p >= 'A' && p <= 'Z') {
-      if (f && f.length > 0) {
-        if (k === null) {
-          k = 1;
-        }
-        if (n === null) {
-          n = 0;
-        }
-        e.push({ type: 'element', name: f, count: k, charge: n });
-        f = '';
-      }
-      k = null;
-      d = false;
-      n = null;
-      f += p;
-    } else {
-      if (p >= 'a' && p <= 'z') {
-        f += p;
-      } else {
-        if (p >= '0' && p <= '9') {
-          if (d) {
-            if (n === null) {
-              n = 0;
-            }
-            n = n * 10 + (p - '0');
-          } else {
-            if (k === null) {
-              k = 0;
-            }
-            k = k * 10 + (p - '0');
-          }
-        } else {
-          if (p == '+') {
-            if (d) {
-              if (!n) {
-                n = 1;
-              }
-            } else {
-              if (k) {
-                if (!k) {
-                  k = 1;
-                }
-              }
-            }
-          } else {
-            if (p == '-') {
-              if (d) {
-                if (n) {
-                  n = -n;
-                } else {
-                  n = -1;
-                }
-              } else {
-                if (k) {
-                  if (k) {
-                    k = -k;
-                  } else {
-                    k = -1;
-                  }
-                }
-              }
-            } else {
-              if (p == '^') {
-                d = true;
-              } else {
-                if (p == '_') {
-                  d = false;
-                } else {
-                  if (p == '(' || p == '[') {
-                    if (f && f.length > 0) {
-                      if (k === null) {
-                        k = 1;
-                      }
-                      if (n === null) {
-                        n = 0;
-                      }
-                      e.push({ type: 'element', name: f, count: k, charge: n });
-                      f = '';
-                      k = null;
-                      d = false;
-                      n = null;
-                    }
-                    e = [];
-                    q.push(e);
-                    j.push('');
-                  } else {
-                    if (p == ')') {
-                      if (f && f.length > 0) {
-                        if (k === null) {
-                          k = 1;
-                        }
-                        if (n === null) {
-                          n = 0;
-                        }
-                        e.push({
-                          type: 'element',
-                          name: f,
-                          count: k,
-                          charge: n,
-                        });
-                        f = '';
-                      }
-                      k = null;
-                      d = false;
-                      n = null;
-                      a = true;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  return o;
-};
-Hexane.decomposeChemFormula = function (j) {
-  var h = Hexane.tokenizeChemFormula(j);
-  var d = {};
-  for (var f = 0; f < h.length; ++f) {
-    var e = h[f];
-    if (e.type == 'element') {
-      if (d[e.name]) {
-        d[e.name] += e.count;
-      } else {
-        d[e.name] = e.count;
-      }
-      d.charge = e.charge;
-    } else {
-      var g = Hexane.decomposeChemFormula(e.name);
-      for (var a in g) {
-        if (d[a]) {
-          d[a] += g[a] * e.count;
-        } else {
-          d[a] = g[a] * e.count;
-        }
-      }
-      d.charge = e.charge;
-    }
-  }
-  return d;
-};
-Hexane.Balance = (function () {
-  var d = {};
-  var a = function (f, e) {
-    var i = f * e;
-    if (e < f) {
-      var g = f;
-      f = e;
-      e = g;
-    }
-    while (e > 1e-128) {
-      var h = f % e;
-      f = e;
-      e = h;
-    }
-    return i / f;
-  };
-  d.balanceNumerical = function (g) {
-    g = g
-      .replaceAll('<-', '=')
-      .replaceAll('->', '=')
-      .replaceAll('>', '=')
-      .replaceAll('<', '')
-      .replaceAll('^+', '^1')
-      .replace(/\^\{([0-9]*)\+\}/, '^{$1}');
-    var p = g
-      .replaceAll('{', '')
-      .replaceAll('}', '')
-      .replace(/\+$/, '')
-      .replaceAll('+=', '=')
-      .replaceAll('++', '+')
-      .split('=');
-    if (p.length != 2) {
-      return null;
-    }
-    var r = {};
-    var y = 0,
-      q = 0;
-    var l = p[0].split('+');
-    for (var x = 0; x < l.length; ++x) {
-      l[x] = Hexane.decomposeChemFormula(l[x].trim());
-      for (var u in l[x]) {
-        if (!r[u]) {
-          ++y;
-          r[u] = true;
-        }
-      }
-    }
-    var D = p[1].split('+');
-    for (var x = 0; x < D.length; ++x) {
-      D[x] = Hexane.decomposeChemFormula(D[x].trim());
-      for (var u in D[x]) {
-        if (!r[u]) {
-          ++y;
-          r[u] = true;
-        }
-      }
-    }
-    q = l.length + D.length;
-    var B = new Matrix(y + 1, q);
-    var n = 0;
-    for (var u in r) {
-      for (var x = 0; x < l.length; ++x) {
-        B.set(n, x, l[x][u] || 0);
-      }
-      for (var x = 0; x < D.length; ++x) {
-        B.set(n, l.length + x, -D[x][u] || 0);
-      }
-      ++n;
-    }
-    for (var x = 0; x < l.length; ++x) {
-      B.set(y, x, l[x]['charge'] || 0);
-    }
-    for (var x = 0; x < D.length; ++x) {
-      B.set(y, l.length + x, -D[x]['charge'] || 0);
-    }
-    var o = B.gauss().toArray();
-    var F = B.solve(new Matrix(q, 1));
-    var f = new Matrix(1, q);
-    var s = -1;
-    var E = true;
-    for (var x = 0; x < o.length; ++x) {
-      var t = -1;
-      for (var v = s + 1; v < o[x].length; ++v) {
-        if (Math.abs(o[x][v]) > 1e-10) {
-          if (t === -1) {
-            t = v;
-            s = t;
-            f.data[v] = 0;
-          } else {
-            f.data[t] -= o[x][v];
-            f.data[v] = 1;
-            E = false;
-          }
-        }
-      }
-    }
-    if (E) {
-      return null;
-    }
-    var z = 1;
-    var A = 100001;
-    var m = 1e-10;
-    var e = new Matrix(1, q);
-    for (var x = 0; x < q; ++x) {
-      for (var v = 1; v < A; ++v) {
-        if (Math.abs(f.data[x] * v - Math.round(f.data[x] * v)) < m) {
-          e.data[x] = v;
-          break;
-        }
-      }
-    }
-    for (var x = 0; x < q; ++x) {
-      var C = e.data[x];
-      z = a(z, C);
-    }
-    for (var x = 0; x < q; ++x) {
-      f.data[x] = Math.round(f.data[x] * z);
-    }
-    return f.toArray()[0];
-  };
-  d.balance = function (n) {
-    var l = d.balanceNumerical(n);
-    if (!l) {
-      return 'Error';
-    }
-    var h = '';
-    for (var j = 0; j < n.length; ++j) {
-      var k = n[j];
-      if ('=<>'.indexOf(k) != -1) {
-        h += k;
-      }
-    }
-    if (h == '>') {
-      h = '->';
-    }
-    if (h == '<') {
-      h = '<-';
-    }
-    if (h == '<>') {
-      h = '<->';
-    }
-    n = n
-      .replaceAll('<-', '=')
-      .replaceAll('->', '=')
-      .replaceAll('>', '=')
-      .replaceAll('<', '')
-      .replace('^+', '^1')
-      .replace(/\^\{([0-9]*)\+\}/, '^{$1}');
-    var g = n
-      .replace(/\+$/, '')
-      .replaceAll('+=', '=')
-      .replaceAll('++', '+')
-      .split('=');
-    var f = g[0].split('+');
-    var o = g[1].split('+');
-    var m = '';
-    for (var j = 0; j < f.length; ++j) {
-      if (j != 0) {
-        m += ' + ';
-      }
-      if (f[j].indexOf('^') != -1) {
-        if (
-          f[j].length >= 2 &&
-          !(
-            f[j][f[j].length - 1] == '-' ||
-            (f[j][f[j].length - 1] == '}' && f[j][f[j].length - 2] == '-')
-          )
-        ) {
-          f[j] += '+';
-          f[j] = f[j].replace('^', '^{') + '}';
-        }
-        f[j] = f[j].replace('^{1+}', '^+');
-      }
-      if (l[j] == 1) {
-        m += f[j].trim();
-      } else {
-        if (l[j] > 1) {
-          m += l[j] + ' ' + f[j].trim();
-        }
-      }
-    }
-    m += ' ' + h + ' ';
-    var e = f.length;
-    for (var j = 0; j < o.length; ++j) {
-      if (j != 0) {
-        m += ' + ';
-      }
-      if (o[j].indexOf('^') != -1) {
-        if (
-          o[j].length >= 2 &&
-          !(
-            o[j][o[j].length - 1] == '-' ||
-            (o[j][o[j].length - 1] == '}' && o[j][o[j].length - 2] == '-')
-          )
-        ) {
-          o[j] += '+';
-          o[j] = o[j].replace('^', '^{') + '}';
-        }
-        o[j] = o[j].replace('^{1+}', '^+');
-      }
-      if (l[j + e] == 1) {
-        m += o[j].trim();
-      } else {
-        if (l[j + e] > 1) {
-          m += l[j + e] + ' ' + o[j].trim();
-        }
-      }
-    }
-    return m;
-  };
-  return d;
-})();

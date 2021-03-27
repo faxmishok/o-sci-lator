@@ -1,5 +1,3 @@
-// const { doc } = require("prettier");
-
 $(document).ready(function () {
   var res = document.querySelectorAll('.mainClick');
 
@@ -17,9 +15,7 @@ $(document).ready(function () {
         // store value in a map
         name_value_array.push(aControl.value, aControl.name);
 
-        document
-          .getElementById('resultField')
-          .appendChild(document.createTextNode(aControl.value + ' '));
+        document.getElementById('resultField');
       }
     }
     // show map values as a popup
@@ -91,15 +87,12 @@ $(document).ready(function () {
         var resultArr = document.querySelector('.customResult');
         resultArr.innerHTML = ' ';
         for (let i = 0; i < response.result.length; i++) {
-          var row = document.createElement("div");
+          var row = document.createElement('div');
 
           for (let j = 0; j < response.result[i].length; j++) {
-            var column = document.createElement("span");
+            var column = document.createElement('span');
             column.innerHTML = `${response.result[i][j]}`;
             row.appendChild(column);
-
-
-
           }
           resultArr.appendChild(row);
         }

@@ -1,5 +1,6 @@
 html {
   -webkit-user-select: none;
+  user-select: none;
   -webkit-user-drag: none;
 }
 
@@ -50,12 +51,6 @@ input:focus + label {
   transform: scale(1.02);
 }
 
-/* Adding an outline to the label on focus */
-/* input:focus + label {
-  outline: 1px solid #000;
-  outline: -webkit-focus-ring-color auto 2px;
-} */
-
 /*********************************************/
 .image-preview {
   width: 300px;
@@ -86,9 +81,6 @@ input:focus + label {
 
 HOME BACK **************
 */
-
-/* #home-btn {
-} */
 
 .home-btn a {
   top: 11px;

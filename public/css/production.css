@@ -4,7 +4,7 @@
     url('raleway-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-} /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+}
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -594,8 +594,8 @@ th {
 .mq-math-mode .mq-matrixed-container {
   filter: progid:DXImageTransform.Microsoft.Chroma(color='white');
   margin-top: -0.1em;
-} /*! Hexane CSS Styles | Apache License 2.0 | hexane.tk
-    Based on: HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
+}
+
 html {
   color: #1e0424;
   font-size: 1em;
