@@ -14,13 +14,13 @@ body {
   font-family: 'Raleway', sans-serif;
   font-weight: 800;
 }
+
 .navlist {
   overflow: hidden;
   height: 78px;
   margin: 0;
   padding: 0;
   list-style-type: none;
-
   text-align: center;
   background-color: #0d0f33;
 }
@@ -32,9 +32,7 @@ body {
   padding: 27px 71px;
   text-decoration: none;
   font-size: 20px;
-
   text-transform: uppercase;
-  /* font-family: 'Fredoka One', cursive; */
 }
 
 .home_but {
@@ -44,7 +42,6 @@ body {
 }
 
 #home_but_img {
-  /* width: 181px; */
   height: 59px;
   padding-top: 9px;
 }
@@ -98,9 +95,7 @@ a.navlinks:hover {
   position: absolute;
   top: 45%;
   left: 50%;
-
   transform: translate(-50%, -50%);
-  /* font-family: 'Fredoka One', cursive; */
 }
 
 .div2 strong {
@@ -109,7 +104,6 @@ a.navlinks:hover {
   font-size: 10px;
   text-transform: uppercase;
   color: #a9acef;
-  /* font-family: 'Fredoka One', cursive; */
 }
 
 .mainContainer {
@@ -132,11 +126,9 @@ a.navlinks:hover {
 
 #conleft {
   padding: 0px 50px 0px 50px;
-  /* float: left; */
-  /* text-align: center; */
 }
+
 #conright {
-  /* float: right; */
   padding: 0px 50px 0px 50px;
 }
 
@@ -150,21 +142,26 @@ a.navlinks:hover {
   font-size: 18px;
   word-spacing: 4px;
   font-weight: 650;
-
   font-style: normal;
-  /* font-family: 'Fredoka One', cursive; */
 }
 
 #conright img {
   width: 300px;
   height: 200px;
 }
+
 #conright em {
   color: orange;
   font-size: 18px;
   font-weight: 650;
   word-spacing: 4px;
   font-style: normal;
+}
 
-  /* font-family: 'Fredoka One', cursive; */
+#em-text {
+  text-align: right;
+}
+
+#i-text {
+  text-align: left;
 }
