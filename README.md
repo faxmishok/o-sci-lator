@@ -84,7 +84,7 @@ So that's it.Now you have node and npm installed on your machine.You can check t
 
 
 ## Clone this repository to your computer
-Next step is cloning the current repo to your machine to get this MERN app installed on your computer. <br />
+Next step is cloning the current repo to your machine to get this Node.JS app installed on your computer. <br />
 You can clone it with `git clone` <br />
 `git clone https://github.com/faxmishok/o-sci-lator.git`
 
