@@ -1,43 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="mathquill.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="mathquill.js"></script>
-    <script src="evaluatex.min.js"></script>
-    <script>
-      var MQ = MathQuill.getInterface(2);
-    </script>
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Selamun Aleykum!</h1>
-    <p>Type math here: <span id="math-field"></span></p>
-    <p>LaTeX of what you typed: <span id="latex"></span></p>
-    <p>Answer calculated by evaluatex: <span id="ans"></span></p>
-    <form action="" method="POST">
-      <input id="math-field" type="text">
-    </form>
-    <script type="text/javascript">
-      var mathFieldSpan = document.getElementById('math-field');
-      var latexSpan = document.getElementById('latex');
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+	<title>O-Sci-Lator</title>
+
+	<!-- Favicon metadata  -->
+	<link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="60x60" href="img/apple-touch-icon-60x60.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon-76x76.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon-120x120.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-icon" sizes="152x152" href="img/apple-touch-icon-152x152.png" />
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon-180x180.png" />
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="img/android-chrome-192x192.png" sizes="192x192" />
+	<link rel="icon" type="image.png" href="img/android-chrome-512x512.png" sizes="512x512" />
+	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
+	<link rel="manifest" href="site.webmanifest" />
+	<link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#5933a7" />
+	<meta name="apple-mobile-web-app-title" content="O-Sci-Lator" />
+	<meta name="application-name" content="O-Sci-Lator" />
+	<meta name="msapplication-TileColor" content="#da532c" />
+	<meta name="msapplication-TileImage" content="img/mstile-144x144.png" />
+	<meta name="theme-color" content="#ffffff" />
+</head>
+
+<body>
+
+	<nav class="navlist">
+
+		<a class="home_but" href="">
+			<img id="home_but_img" src="img/o-sci-lator-1.png">
+		</a>
 
 
-      var MQ = MathQuill.getInterface(2); // for backcompat
-      var mathField = MQ.MathField(mathFieldSpan, {
-        spaceBehavesLikeTab: true, // configurable
-        handlers: {
-          edit: function () {
-            // useful event handlers
-            latexSpan.textContent = mathField.latex(); // simple API
-          },
-        },
-      });
-    </script>
-  </body>
-  <script src="request.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<a class="navlinks" href="graph.html">
+			Graph Calculator
+		</a>
+
+
+		<a class="navlinks" href="ocr.html">
+			OCR Calculator
+		</a>
+
+
+		<a class="navlinks" href="matrix.html">
+			Matrix
+		</a>
+
+
+		<a class="navlinks" href="#">
+			About
+		</a>
+
+
+	</nav>
+
+	<div class="div1"></div>
+
+
+	<div class="div2">
+		<p>Optical Character Recognition Powered Scientific Calculator</p>
+		<strong>Ufaz 2021</strong>
+	</div>
+
+	<div class="mainContainer">
+		<div id="conleft">
+			<img src="img/calculator1.jpeg">
+			<br />
+			<div id="i-text">
+				<i>A digital calculator is a type of electronic calculator, usually but not always
+					handheld, designed to
+					calculate problems in science, engineering, and mathematics. They have completely replaced slide
+					rules
+					in traditional applications, and are widely used in both education and professional settings.In
+					certain
+					contexts such as higher education, scientific calculators have been superseded by graphing
+					calculators,
+					which offer a superset of digital calculator functionality along with the ability to graph input
+					data
+					and write and store programs for the device.
+					In certain contexts such as higher education, scientific calculators have been superseded by
+					graphing
+					calculators, which offer a superset of digital calculator functionality along with the ability to
+					graph
+					input data and write and store programs for the device. There is also some overlap with the
+					financial
+					calculator market.
+				</i>
+			</div>
+		</div>
+		<div id="conright">
+			<img src="img/calculator2.png">
+			<br />
+
+			<div id="em-text"><em>The first scientific calculator that included all of the basic ideas above was the
+					programmable
+					Hewlett-Packard HP-9100A, released in 1968, though the Wang LOCI-2 and the Mathatronics Mathatron
+					had
+					some features later identified with scientific calculator designs. The HP-9100 series was built
+					entirely
+					from discrete transistor logic with no integrated circuits, and was one of the first uses of the
+					CORDIC
+					algorithm for trigonometric computation in a personal computing device, as well as the first
+					calculator
+					based on reverse Polish notation (RPN) entry. HP became closely identified with RPN calculators from
+					then on, and even today some of their high-end calculators (particularly the long-lived HP-12C
+					financial
+					calculator and the HP-48 series of graphing calculators) still offer RPN as their default input mode
+					due
+					to having garnered a very large following.
+				</em>
+			</div>
+		</div>
+	</div>
+
+</body>
+
 </html>

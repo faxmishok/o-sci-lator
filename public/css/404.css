@@ -1,0 +1,104 @@
+html {
+  color: #888;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+div.main-container {
+  background-color: #fafafa;
+  color: #333;
+}
+
+.main-container h1,
+.main-container h2 {
+  color: #444;
+  font-size: 2em;
+  font-weight: 400;
+  text-align: center;
+}
+
+.main-container p {
+  margin: 10px auto;
+  width: 280px;
+  text-align: center;
+}
+
+.main-container .wrapper.main {
+  padding: 100px 0;
+}
+
+@media only screen and (max-width: 280px) {
+  .main-container p {
+    width: 95%;
+  }
+
+  .main-container h1 {
+    font-size: 1.5em;
+    margin: 0 0 0.3em;
+  }
+}
+
+#header-logo {
+  height: 100px;
+  padding-left: 30px;
+}
+
+#header-special h1 {
+  display: flex;
+  align-items: center;
+}
+
+article {
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+/*  BUTTON DESIGN   */
+
+a {
+  background: #5e54ac;
+  color: #fff;
+  border: none;
+  position: relative;
+  width: 700px;
+  height: 60px;
+  font-size: 1.6em;
+  padding: 13px 50px;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+
+a:hover {
+  background: #fafafa;
+  color: #5e54ac;
+}
+a:before,
+a:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #5e54ac;
+  transition: 400ms ease all;
+}
+a:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+a:hover:before,
+a:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+section {
+  padding-bottom: 40px;
+}

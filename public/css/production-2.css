@@ -1,0 +1,125 @@
+html {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#file-upload {
+  height: 30%;
+  background-color: #58478c;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+/**********************************/
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-upload label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  /* background: linear-gradient(326deg, #5f0a87, #a4508b); */
+  background-color: #6247aa;
+  background-image: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+.file-name {
+  position: absolute;
+  bottom: -35px;
+  left: 10px;
+  font-size: 0.85rem;
+  color: rgb(255, 255, 255);
+}
+
+input:hover + label,
+input:focus + label {
+  transform: scale(1.02);
+}
+
+/*********************************************/
+.image-preview {
+  width: 300px;
+  min-height: 100px;
+  /* border: 1px solid #dddddd; */
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #cccccc;
+}
+
+.image-preview__image {
+  display: none;
+  width: 100%;
+}
+
+/***** SUBMIT BTN ****/
+#upload-btn {
+  display: none;
+}
+/***** SUBMIT BTN ****/
+
+/*
+
+HOME BACK **************
+*/
+
+.home-btn a {
+  top: 11px;
+  right: 11px;
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background: #e8dff9;
+  border-radius: 50%;
+  font-size: 25px;
+  color: #58478c;
+  transition: 0.5s;
+}
+
+.home-btn a:before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #280d43;
+  transition: 0.5s;
+  transform: scale(0.9);
+  z-index: -1;
+}
+
+.home-btn a:hover:before {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px #280d43;
+  filter: blur(3px);
+}
+
+.home-btn a:hover {
+  color: #1d0932;
+  box-shadow: 0 0 15px #280d43;
+  text-shadow: 0 0 15px #280d43;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Calculator</title>
+    <script src="https://www.desmos.com/api/v1.5/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/graph.css">
+    <script src="https://use.fontawesome.com/16e233c995.js"></script>
+    <script src="js/graph.js"></script>
+
+    <!-- Favicon Metadata -->
+    <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="img/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="img/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon-180x180.png" />
+    <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/android-chrome-192x192.png" sizes="192x192" />
+    <link rel="icon" type="image.png" href="img/android-chrome-512x512.png" sizes="512x512" />
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#5933a7" />
+    <meta name="apple-mobile-web-app-title" content="O-Sci-Lator" />
+    <meta name="application-name" content="O-Sci-Lator" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="msapplication-TileImage" content="img/mstile-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
+</head>
+
+<body>
+
+
+    <div class="outer">
+        <div class="container">
+            <div class="btn-header">
+                <a href="/"><i id="fa-home" class="fa fa-home" aria-hidden="true"></i></a>
+                <div id="header">
+                    GRAPH CALCULATOR
+                </div>
+            </div>
+            <div class="resizable" id="calculator"></div>
+        </div>
+    </div>
+
+    <script>
+        var elt = document.getElementById('calculator');
+        var calculator = Desmos.GraphingCalculator(elt);
+        calculator.setExpression({ id: 'graph1', latex: 'y=x^2' });
+        calculator.setExpression({ id: 'graph2', latex: 'y=2x^2-6' });
+        calculator.setExpression({ id: 'graph3', latex: 'y=-x^2+1' });
+        // calculator.setExpression({ id: 'graph4', latex: 'y=sin{x}'});
+
+    </script>
+</body>
+
+</html>

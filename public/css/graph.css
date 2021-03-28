@@ -1,0 +1,114 @@
+html {
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+body {
+  background-color: #0d0f33;
+}
+
+.outer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+}
+
+#calculator {
+  width: 800px;
+  height: 480px;
+  padding-top: 40px;
+}
+
+#header {
+  font-size: 50px;
+  margin: 10px;
+  text-align: center;
+  font-family: 'Fredoka One', cursive;
+  color: white;
+}
+
+/*** Back to Home btn ***/
+a {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  background: #ffffff;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #666;
+  transition: 0.5s;
+}
+
+a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #4400d3;
+  transition: 0.5s;
+  transform: scale(0.9);
+  z-index: -1;
+}
+
+a:hover:before {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px #4400d3;
+  filter: blur(3px);
+}
+
+a:hover {
+  color: #8c02ff;
+  box-shadow: 0 0 15px #4400d3;
+  text-shadow: 0 0 15px #4400d3;
+}
+
+#fa-home {
+  color: #4200ff;
+}
+
+img {
+  width: 42px;
+  height: 42px;
+}
+
+.btn-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+i {
+  color: #1d29f3;
+}
+
+.dcg-icon-desmos,
+.dcg-powered-by,
+.dcg-expressions-branding {
+  display: none;
+}
+
+/*****************************/
+
+.resizable {
+  overflow: hidden;
+  resize: both;
+  max-width: 1500px;
+  max-height: 900px;
+  min-width: 50px;
+  min-height: 50px;
+  background-color: none;
+}

@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #04021f;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+}
+
+.navlist {
+  overflow: hidden;
+  height: 78px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+  background-color: #0d0f33;
+}
+
+.navlinks {
+  display: inline-block;
+  color: #9196ff;
+  text-align: center;
+  padding: 27px 71px;
+  text-decoration: none;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.home_but {
+  float: left;
+  padding-left: 50px;
+  text-decoration: none;
+}
+
+#home_but_img {
+  height: 59px;
+  padding-top: 9px;
+}
+
+a.navlinks:hover {
+  color: white;
+}
+
+.div1 {
+  background-color: #0d0f33;
+  height: 54px;
+  width: 100%;
+  animation: mymove1 5s infinite;
+}
+@keyframes mymove1 {
+  from {
+    background-color: #0d0f33;
+  }
+  to {
+    background-color: #ff4949;
+  }
+
+  0% {
+    background-color: #0d0f33;
+  }
+  25% {
+    background-color: #ff4949;
+  }
+  50% {
+    background-color: #ff4949;
+  }
+  100% {
+    background-color: #0d0f33;
+  }
+}
+
+.div2 {
+  background-color: #090727;
+  height: 5em;
+  position: relative;
+}
+
+.div2 p {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff4949;
+
+  margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.div2 strong {
+  padding-right: 4px;
+  float: right;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #a9acef;
+}
+
+.mainContainer {
+  padding: 0;
+  margin: 0;
+  height: 460px;
+  display: flex;
+  background-color: #ff4949;
+}
+
+#conleft,
+#conright {
+  width: 50%;
+  height: 460px;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  background-color: #04021f;
+}
+
+#conleft {
+  padding: 0px 50px 0px 50px;
+}
+
+#conright {
+  padding: 0px 50px 0px 50px;
+}
+
+#conleft img {
+  width: 317px;
+  height: 200px;
+}
+
+#conleft i {
+  color: lightseagreen;
+  font-size: 18px;
+  word-spacing: 4px;
+  font-weight: 650;
+  font-style: normal;
+}
+
+#conright img {
+  width: 300px;
+  height: 200px;
+}
+
+#conright em {
+  color: orange;
+  font-size: 18px;
+  font-weight: 650;
+  word-spacing: 4px;
+  font-style: normal;
+}
+
+#em-text {
+  text-align: right;
+}
+
+#i-text {
+  text-align: left;
+}

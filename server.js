@@ -21,6 +21,11 @@ RouteConf(express, app);
 // Serving front-end (static files)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set 404 page
+app.get('*', function (req, res) {
+  res.status(404).redirect('404.html');
+});
+
 // Handling undhandled promise errors
 process.on('unhandledRejection', (err) => {
   console.log(`Unhandled Error: ${err}`);
